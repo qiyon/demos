@@ -15,7 +15,7 @@ if(file_exists(__DIR__."/devNetConfig.php")){
 }else{
     $db_connection = "mysql:host=127.0.0.1;dbname=sxdb";
     $db_username = "root";
-    $db_passwd = "";
+    $db_passwd = "619619619";
 
     $loginUrl="?r=index/login";
 
