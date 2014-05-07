@@ -157,7 +157,7 @@ class SxUser
                 'nickname'=>$user_model->nickname,
                 'isadmin'=>$user_model->isadmin,
                 'token'=>$user_model->token,
-                'avator'=>"http://202.115.15.3/sxadmin/img/avator.jpg",
+                'avator'=>"http://202.115.15.3/sxadmin/images/avator.jpg",
             );
         }else{
             return array();
