@@ -1,6 +1,7 @@
 <?php
 class IndexController extends Controller{
 
+    public  $layout=false;
     /**
      * 后台主页面
      */
@@ -12,40 +13,4 @@ class IndexController extends Controller{
     /**
      * 登陆界面
      */
-    public function actionLogin(){
-        $this->layout="";
-    	$this->title = "Login";
-        $url=Yii::app()->request->getParam('url');
-        $username=Yii::app()->request->getParam('username');
-        $passwd=Yii::app()->request->getParam('passwd');
-    	if (!empty($username)){
-            if (Yii::app()->user->loginAuth($username,$passwd)){
-                $remember=intval(Yii::app()->request->getParam('remember','0'));
-                Yii::app()->user->login($username,$remember);
-                if (empty($url)){
-                    header("Location:?r=index/index");
-                }else{
-                    header("Location:?r={$url}");
-                }
-            }else{
-    		    $this->render("login",array(
-                    'errortype'=>'warning',
-                    'message'=>'用户名或密码错误！'
-                ));
-            }
-    	}else{
-    		$this->render("login");
-    	}
-
-    }
-
-    /**
-     * 注销操作
-     */
-    public function actionLogout()
-    {
-        Yii::app()->user->logout();
-        header("Location:?r=index/login");
-    }
-
 }

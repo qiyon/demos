@@ -9,7 +9,9 @@ class Controller extends CController
 	 * @var string the default layout for the controller view. Defaults to '//layouts/column1',
 	 * meaning using a single column layout. See 'protected/views/layouts/column1.php'.
 	 */
-	public $layout='//layouts/homeLayout';
+    public  $layout=false;
+    //使用layout如下格式
+	//public $layout='//layouts/homeLayout';
 
 
 
@@ -64,30 +66,18 @@ class Controller extends CController
      */
     public function filterLoginAuth($filterChain)
     {
-        if (!in_array($this->action->id,$this->noAuth())){
-            if (! Yii::app()->user->isLogined()){
-                $queryUrl=(empty($_SERVER["QUERY_STRING"])) ? "" : "&url=".urlencode(str_replace("r=","",$_SERVER["QUERY_STRING"]));
-                header("Location:?r=index/login".$queryUrl);
-                die();
+        if ( isset($this->getModule()->id) && ($this->getModule()->id=='admin') ){
+            if (!in_array($this->action->id,$this->noAuth())){
+                if (! Yii::app()->user->isLogined()){
+                    $queryUrl=(empty($_SERVER["QUERY_STRING"])) ? "" : "&url=".urlencode(str_replace("r=","",$_SERVER["QUERY_STRING"]));
+                    header("Location:".LOGIN_URL.$queryUrl);
+                    die();
+                }
             }
         }
         $filterChain->run();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

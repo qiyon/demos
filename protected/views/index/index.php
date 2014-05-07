@@ -1,7 +1,2 @@
-<div class="container">
-    <div class="row">
-        <ol class="breadcrumb">
-            This is the Action content.
-        <ol>
-    </div>
-</div>
+前台页面<br>
+<a href="?r=admin/index/index">后台页面</a>

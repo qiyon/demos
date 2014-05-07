@@ -17,7 +17,7 @@ if(file_exists(__DIR__."/devNetConfig.php")){
     $db_username = "sxadmin";
     $db_passwd = "619619619";
 
-    $loginUrl="?r=index/login";
+    $loginUrl="?r=admin/index/login";
 
     //定义时区，中国为PRC
     $time_the_zone="PRC";
