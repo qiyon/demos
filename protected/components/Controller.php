@@ -34,7 +34,8 @@ class Controller extends CController
 
     public  function init()
     {
-        if ( stristr($_SERVER["HTTP_ACCEPT"],"application/json") ) {
+        if ( isset($_SERVER["HTTP_ACCEPT"]) && stristr($_SERVER["HTTP_ACCEPT"],"application/json") ) {
+
             header("Content-Type: application/json;charset=utf-8");
         }else{
             header("Content-Type: text/html;charset=utf-8");

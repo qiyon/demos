@@ -21,10 +21,18 @@ class SxuserController extends Controller
         $username=Yii::app()->request->getParam("username");
         $passwd=Yii::app()->request->getParam("passwd");
 
-        if ($username=="admin"&&$passwd=="admin"){
+        if (Yii::app()->user->loginAuth($username,$passwd)){
+            $uid=Yii::app()->user->getIdByUsername($username);
+            $userToken=Yii::app()->user->getTokenByUsername($username);
+            if ($userToken=="-1"){
+                echo json_encode(array(
+                    "code"=>-1,
+                    "message"=>"wrong!",
+                ));
+            }
             echo json_encode(array(
                 "code"=>0,
-                "token"=>md5("admin"),
+                "token"=>$uid.'_'.$userToken,
             ));
         }else{
             echo json_encode(array(

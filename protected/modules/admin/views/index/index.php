@@ -1,7 +1,8 @@
 <div class="container">
     <div class="row">
         <ol class="breadcrumb">
-            This is the Action content.
+            <a href="?r=index">前台</a>
+            <a href="?r=admin/booklib/index">书库</a>
         <ol>
     </div>
 </div>

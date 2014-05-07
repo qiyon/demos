@@ -53,6 +53,11 @@ class SxUser
         return $username;
     }
 
+    public function getNickname()
+    {
+        return $this->getNickByUsername($this->getUsername());
+    }
+
     /**
      * 将用户登陆信息存储到session中，保持登陆则同时存储在cookie中
      *
@@ -95,6 +100,14 @@ class SxUser
             unset($cookie["sx-username"]);
     }
 
+    public function getNickByUsername($username)
+    {
+        $user_model=user_info::model()->find("username=:username",array(":username"=>$username));
+        if (!empty($user_model)){
+            return $user_model->nickname;
+        }
+    }
+
     /**
      * 通过用户名获取用户信息，不存在返回-1
      * @param $username
@@ -107,6 +120,16 @@ class SxUser
             return $user_model->id;
         }else{
             return -1;
+        }
+    }
+
+    public function getTokenByUsername($username)
+    {
+        $user_model=user_info::model()->find("username=:username",array(":username"=>$username));
+        if (!empty($user_model)){
+            return $user_model->token;
+        }else{
+            return "-1";
         }
     }
 
