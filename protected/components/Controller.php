@@ -29,7 +29,29 @@ class Controller extends CController
 
 
     //Sx define
-    public $theme="cerulean";
+    public $themeArray=array(
+        'default',
+        //'amelia',
+        'cerulean',
+        'cosmo',
+        'custom',
+        //因jqueryDataTable表格问题，取消
+        //'cyborg',
+        //'darkly',
+        'flatly',
+        'journal',
+        'lumen',
+        'readable',
+        //'shamrock',
+        'simplex',
+        'slate',
+        'spacelab',
+        'superhero',
+        'united',
+        'yeti',
+    );
+
+    public $theme="default";
     public $title="";
 
     public  function init()
@@ -39,6 +61,11 @@ class Controller extends CController
             header("Content-Type: application/json;charset=utf-8");
         }else{
             header("Content-Type: text/html;charset=utf-8");
+        }
+
+        $cookies=Yii::app()->request->getCookies();
+        if ( isset($cookies["sx-theme"]) && in_array($cookies["sx-theme"],$this->themeArray)){
+            $this->theme=$cookies["sx-theme"];
         }
     }
 

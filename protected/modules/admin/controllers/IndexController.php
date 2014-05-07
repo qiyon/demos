@@ -15,6 +15,14 @@ class IndexController extends Controller
         $this->render('index');
     }
 
+    public function actionSetTheme()
+    {
+        $cookie=new CHttpCookie("sx-theme",Yii::app()->request->getParam("theme"));
+        $cookie->expire=time()+365*24*60*60;
+        Yii::app()->request->cookies["sx-theme"]=$cookie;
+        echo 0;
+    }
+
     /**
      * 登陆界面
      */

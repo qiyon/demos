@@ -10,23 +10,13 @@
                     <li class="dropdown">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">主题<b class="caret"></b></a>
                         <ul class="dropdown-menu themes">
-                            <li><a href="#" data-theme-name="amelia">Amelia</a></li>
-                            <li><a href="#" data-theme-name="cerulean">Cerulean</a></li>
-                            <li><a href="#" data-theme-name="cosmo">Cosmo</a></li>
-                            <li><a href="#" data-theme-name="custom">Custom</a></li>
-                            <li><a href="#" data-theme-name="cyborg">Cyborg</a></li>
-                            <li><a href="#" data-theme-name="darkly">Darkly</a></li>
-                            <li><a href="#" data-theme-name="flatly">Flatly</a></li>
-                            <li><a href="#" data-theme-name="journal">Journal</a></li>
-                            <li><a href="#" data-theme-name="lumen">Lumen</a></li>
-                            <li><a href="#" data-theme-name="readable">Readable</a></li>
-                            <li><a href="#" data-theme-name="shamrock">Shamrock</a></li>
-                            <li><a href="#" data-theme-name="simplex">Simplex</a></li>
-                            <li><a href="#" data-theme-name="slate">Slate</a></li>
-                            <li><a href="#" data-theme-name="spacelab">Spacelab</a></li>
-                            <li><a href="#" data-theme-name="superhero">Superhero</a></li>
-                            <li><a href="#" data-theme-name="united">United</a></li>
-                            <li><a href="#" data-theme-name="yeti">Yeti</a></li>
+                            <?php
+                                foreach ($this->themeArray as $sgTheme){
+                                    echo "<li><a href='' sx-theme='{$sgTheme}'>{$sgTheme}";
+                                    if ($sgTheme==$this->theme) echo "  √";
+                                    echo "</a></li>";
+                                }
+                            ?>
                         </ul>
                     </li>
                     <li>
@@ -38,3 +28,12 @@
     </div>
 </div>
 <input id="themes" type="hidden" value="<?php echo $this->theme;?>">
+<script>
+    $("[sx-theme]").click(function(){
+        var theTheme=$(this).attr("sx-theme");
+        $.post("?r=admin/index/setTheme",{theme:theTheme},function(res){
+            location.reload();
+        });
+        return false;
+    });
+</script>
