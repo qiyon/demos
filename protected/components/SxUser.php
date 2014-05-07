@@ -149,7 +149,19 @@ class SxUser
      */
     public function getUserInfoByUsername($username)
     {
-        return array();
+        $user_model=user_info::model()->find("username=:username",array(":username"=>$username));
+        if(!empty($user_model)){
+            return array(
+                'id'=>$user_model->id,
+                'username'=>$user_model->username,
+                'nickname'=>$user_model->nickname,
+                'isadmin'=>$user_model->isadmin,
+                'token'=>$user_model->token,
+                'avator'=>"http://202.115.15.3/sxadmin/img/avator.jpg",
+            );
+        }else{
+            return array();
+        }
     }
 
     /**

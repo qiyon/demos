@@ -39,6 +39,11 @@
         });
 
         $("#add-book-handel").click(function(){
+            $.ajax({
+                type:"post",
+                url:"?r=admin/booklib/addbook",
+
+            });
             $("#theModal").modal("hide");
         });
     });
