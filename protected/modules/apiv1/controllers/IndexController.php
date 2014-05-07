@@ -13,7 +13,7 @@ class IndexController extends Controller
     {
         echo json_encode(array(
             'code'=>0,
-            'token'=>md5("admin"),
+            'message'=>"nothing",
         ));
     }
 
