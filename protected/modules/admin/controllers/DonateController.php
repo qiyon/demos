@@ -17,6 +17,9 @@ class DonateController extends Controller
 
     public function actionIndex()
     {
+        echo "<pre>";
+        print_r(donate::getInfo(0));
+        echo "</pre>";
         $this->render("donate");
     }
 }

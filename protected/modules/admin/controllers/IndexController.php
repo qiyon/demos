@@ -37,7 +37,7 @@ class IndexController extends Controller
                 $remember=intval(Yii::app()->request->getParam('remember','0'));
                 Yii::app()->user->login($username,$remember);
                 if (empty($url)){
-                    header("Location:?r=admin/index/index");
+                    header("Location:?r=index/index");
                 }else{
                     header("Location:?r={$url}");
                 }

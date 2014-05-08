@@ -100,6 +100,12 @@ class Controller extends CController
                     $queryUrl=(empty($_SERVER["QUERY_STRING"])) ? "" : "&url=".urlencode(str_replace("r=","",$_SERVER["QUERY_STRING"]));
                     header("Location:".LOGIN_URL.$queryUrl);
                     die();
+                }else{
+                    $userInfo=Yii::app()->user->getUserInfoByUsername(Yii::app()->user->getUsername());
+                    if($userInfo["isadmin"]!=1){
+                        echo "No Permission.";
+                        die();
+                    }
                 }
             }
         }
