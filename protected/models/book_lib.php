@@ -36,6 +36,9 @@ class book_lib extends CActiveRecord
         $booklib_model->author=$bookInfo["author"];
         $booklib_model->pub_house=$bookInfo["pub_house"];
         $booklib_model->ISBN=$bookInfo["ISBN"];
+        $booklib_model->about_link=$bookInfo["about_link"];
+        $booklib_model->tags=$bookInfo["tags"];
+        $booklib_model->description=$bookInfo["description"];
 
         return $booklib_model->save();
     }

@@ -11,6 +11,8 @@ class BooklibController extends Controller
 {
     public $layout="//layouts/adminLayout";
 
+    public $title="书籍管理";
+
     /**
      * 更改视图路径到../view/下
      */

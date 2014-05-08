@@ -33,19 +33,27 @@
                 <span class="label label-info">添加前请先确认书籍是否已存在</span>
                 <button class="close" data-dismiss="modal">&times;</button>
             </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <label class="col-sm-2 " >书名</label>
-                        <div class="col-sm-10"><input id="add-bookname" type="text"/></div>
-                        <label class="col-sm-2 " >作者</label>
-                        <div class="col-sm-10"><input id="add-author" type="text"/></div>
-                        <label class="col-sm-2 " >出版社</label>
-                        <div class="col-sm-10"><input id="add-pub_house" type="text"/></div>
-                        <label class="col-sm-2 " >ISBN</label>
-                        <div class="col-sm-10"><input id="add-ISBN" type="text"/></div>
-                    </div>
-                </div>
+            <div class="modal-body" style="min-height: 250px">
+                <label style="min-width: 100px"  >书名</label>
+                <input id="add-bookname" type="text" placeholder="不能为空"/><br>
+
+                <label style="min-width: 100px" >作者</label>
+                <input id="add-author" type="text" placeholder="用逗号隔开,译者加(译)"/><br>
+
+                <label style="min-width: 100px" >出版社</label>
+                <input id="add-pub_house" type="text"/><br>
+
+                <label style="min-width: 100px" >ISBN</label>
+                <input id="add-ISBN" type="text"/><br>
+
+                <label style="min-width: 100px" >相关链接</label>
+                <input id="add-about_link" type="text" placeholder="链接名:地址 用逗号隔开"/><br>
+
+                <label style="min-width: 100px" >书籍标签</label>
+                <input id="add-tags" type="text" placeholder="用逗号隔开"/><br>
+
+                <label style="min-width: 100px" >书籍说明</label>
+                <textarea id="add-description" style="height: 150px;width: 350px"></textarea>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-defaulta" data-dismiss="modal">关闭</button>
@@ -74,6 +82,9 @@
                     author:$("#add-author").val(),
                     pub_house:$("#add-pub_house").val(),
                     ISBN:$("#add-ISBN").val(),
+                    about_link:$("#add-about_link").val(),
+                    tags:$("#add-tags").val(),
+                    description:$("#add-description").val(),
                 },
                 dataType:"json",
                 success:function(json){
