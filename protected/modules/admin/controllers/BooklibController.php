@@ -85,6 +85,34 @@ class BooklibController extends Controller
             ));
         }
     }
+
+    public function actionGetlist()
+    {
+        $searchBook=Yii::app()->request->getParam('search','');
+        if(empty($searchBook)){
+            $condition=array();
+        }else{
+            $condition=array(
+                'condition'=>'bookname like :bookname',
+                'params'=>array(':bookname'=>'%'.$searchBook.'%'),
+            );
+        }
+        $condition["order"]='id desc';
+        $bookList=book_lib::model()->findAll($condition);
+        $boobArray=array();
+        foreach($bookList as $onebook){
+            $boobArray[]=array(
+                'id'=>$onebook->id,
+                'bookname'=>$onebook->bookname,
+                'author'=>$onebook->author,
+                'ISBN'=>$onebook->ISBN,
+            );
+        }
+        echo json_encode(array(
+            'code'=>0,
+            'data'=>$boobArray,
+        ));
+    }
 }
 
 

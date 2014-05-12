@@ -17,9 +17,15 @@ class DonateController extends Controller
 
     public function actionIndex()
     {
-        echo "<pre>";
-        print_r(donate::getInfo(0));
-        echo "</pre>";
-        $this->render("donate");
+        $agencyModel=agency::model()->findAll();
+        $this->render("donate",array('agencyAll'=>$agencyModel));
+    }
+
+    public function actionAdddonate()
+    {
+        echo json_encode(array(
+            'code'=>0,
+            'message'=>'hehe',
+        ));
     }
 }

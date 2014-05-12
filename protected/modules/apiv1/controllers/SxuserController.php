@@ -16,6 +16,11 @@ class SxuserController extends Controller
     }
 
 
+    /**
+     * API:
+     * in:username,passwd
+     * out:json,登陆信息
+     */
     public function actionLogin()
     {
         $username=Yii::app()->request->getParam("username");
@@ -45,5 +50,33 @@ class SxuserController extends Controller
                 "message"=>"wrong!",
             ));
         }
+    }
+
+    /**
+     * 根据token获取用户信息
+     */
+    public function actionGetinfo()
+    {
+        $id_token=Yii::app()->request->getParam("token",'');
+        if (empty($id_token)){
+            return;
+        }
+        $userInfo=Yii::app()->user->getInfoByApiToken($id_token);
+        if (!empty($userInfo) ){
+            echo json_encode( array(
+                "code"=>0,
+                "token"=>$userInfo["id"].'_'.$userInfo["token"],
+                "username"=>$userInfo["username"],
+                "nickname"=>$userInfo["nickname"],
+                "isadmin"=>$userInfo["isadmin"],
+                "avator"=>$userInfo["avator"],
+            ));
+        }else{
+            echo json_encode(array(
+                'code'=>-1,
+                'message'=>'获取信息失败',
+            ));
+        }
+
     }
 }

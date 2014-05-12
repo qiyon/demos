@@ -44,6 +44,11 @@ class donate extends CActiveRecord
         }
     }
 
+    /**
+     * 获取捐助信息
+     * @param $donateid
+     * @return array
+     */
     public static function getInfo($donateid)
     {
         $donateid=intval($donateid);
@@ -62,9 +67,9 @@ class donate extends CActiveRecord
                 'id'=>$Model_donate->id,
                 'donatetime'=>$Model_donate->donatetime,
                 'description'=>$Model_donate->description,
-                'bookinfo'=>book_lib::getBookInfo(0),
-                'dornorinfo'=>user_info::getUserInfo(0),
-                'agencyinfo'=>agency::getAgencyInfo(0),
+                'bookinfo'=>book_lib::getBookInfo($Model_donate->bookid),
+                'dornorinfo'=>user_info::getUserInfo($Model_donate->dornorid),
+                'agencyinfo'=>agency::getAgencyInfo($Model_donate->agencyid),
             );
         }
 

@@ -90,7 +90,7 @@
                 success:function(json){
                     if(json.code==0){
                         _showMessage("success","添加成功");
-                        JDataTable.fnDraw();
+                        JDataTable.fnDraw(false);
                         $("#theModal").modal("hide");
                     }else{
                         _showMessage("error",json.message);

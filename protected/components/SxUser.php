@@ -170,8 +170,30 @@ class SxUser
      */
     public function getUserInfoById($id)
     {
-        return array();
+        $user_model=user_info::model()->find("id=:id",array(":id"=>$id));
+        if(!empty($user_model)){
+            return array(
+                'id'=>$user_model->id,
+                'username'=>$user_model->username,
+                'nickname'=>$user_model->nickname,
+                'isadmin'=>$user_model->isadmin,
+                'token'=>$user_model->token,
+                'avator'=>"http://202.115.15.3/sxadmin/images/avator.jpg",
+            );
+        }else{
+            return array();
+        }
     }
 
+    public function getInfoByApiToken($apiToken)
+    {
+        $id_token=explode('_',$apiToken);
+        $uInfo=Yii::app()->user->getUserInfoById($id_token[0]);
+        if (!empty($uInfo) && $id_token[1]==$uInfo['token']){
+            return $uInfo;
+        }else{
+            return array();
+        }
+    }
 
 }
