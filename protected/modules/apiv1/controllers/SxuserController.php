@@ -43,7 +43,6 @@ class SxuserController extends Controller
                 "nickname"=>$userInfo["nickname"],
                 "isadmin"=>($userInfo["isadmin"])?true:false,
                 "avator"=>$userInfo["avator"],
-                "null"=>"",
             ));
         }else{
             echo json_encode(array(
