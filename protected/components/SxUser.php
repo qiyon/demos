@@ -195,5 +195,4 @@ class SxUser
             return array();
         }
     }
-
 }

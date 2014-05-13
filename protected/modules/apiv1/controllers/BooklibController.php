@@ -86,14 +86,14 @@ class BooklibController extends Controller
             "tags"=>Yii::app()->request->getParam("tags",""),
             "description"=>Yii::app()->request->getParam("description",""),
         );
-        if( (!empty($apitoken)) &&(Yii::app()->user->getInfoByApiToken($apitoken)["isadmin"]==1)){
+        if( (!empty($apitoken)) &&((Yii::app()->user->getInfoByApiToken($apitoken))["isadmin"]==1)){
 
             if (empty($addinfo["bookname"])) {
                 echo json_encode(array(
                     "code"=>-1,
                     "message"=>"书名不能为空",
                 ));
-                return ;
+                die();
             }
 
             $saveID=book_lib::bookAddOrChange($addinfo);

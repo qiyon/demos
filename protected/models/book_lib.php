@@ -89,6 +89,7 @@ class book_lib extends CActiveRecord
             'about_link'=>'',
             'description'=>'',
             'tags'=>'',
+
         );
         $Model_b=self::model()->findByPk($bookid);
         if (empty($Model_b)){
