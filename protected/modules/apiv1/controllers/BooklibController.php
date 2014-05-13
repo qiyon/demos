@@ -13,9 +13,13 @@ class BooklibController extends Controller
     {
         echo json_encode(array(
             "code"=>0,
+
         ));
     }
 
+    /**
+     * 获取书籍列表
+     */
     public function actionGetlist()
     {
         $seachBook=Yii::app()->request->getParam("search","");
@@ -57,6 +61,9 @@ class BooklibController extends Controller
 
     }
 
+    /**
+     * 通过id获取书籍信息
+     */
     public function actionGetinfobyid()
     {
         $bookid=intval(Yii::app()->request->getParam("bookid"));
@@ -64,6 +71,9 @@ class BooklibController extends Controller
     }
 
 
+    /**
+     * 添加书籍记录
+     */
     public function  actionAddbook()
     {
         $apitoken=Yii::app()->request->getParam("token");
