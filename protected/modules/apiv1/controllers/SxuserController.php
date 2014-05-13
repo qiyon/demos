@@ -41,8 +41,9 @@ class SxuserController extends Controller
                 "token"=>$uid.'_'.$userToken,
                 "username"=>$userInfo["username"],
                 "nickname"=>$userInfo["nickname"],
-                "isadmin"=>$userInfo["isadmin"],
+                "isadmin"=>($userInfo["isadmin"])?true:false,
                 "avator"=>$userInfo["avator"],
+                "null"=>"",
             ));
         }else{
             echo json_encode(array(
@@ -68,7 +69,7 @@ class SxuserController extends Controller
                 "token"=>$userInfo["id"].'_'.$userInfo["token"],
                 "username"=>$userInfo["username"],
                 "nickname"=>$userInfo["nickname"],
-                "isadmin"=>$userInfo["isadmin"],
+                "isadmin"=>($userInfo["isadmin"])?true:false,
                 "avator"=>$userInfo["avator"],
             ));
         }else{
