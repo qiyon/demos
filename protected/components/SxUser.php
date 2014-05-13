@@ -185,7 +185,7 @@ class SxUser
         }
     }
 
-    public function getInfoByApiToken($apiToken)
+    public function getInfoByApiToken($apiToken="")
     {
         $id_token=explode('_',$apiToken);
         $uInfo=Yii::app()->user->getUserInfoById($id_token[0]);
