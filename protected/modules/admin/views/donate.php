@@ -64,9 +64,9 @@
                 <select id="acc-agency" >
                     <option  value="-1">选择受赠点</option>
                     <?php
-                        foreach($agencyAll as $oneAgency){
-                            echo "<option value='{$oneAgency->id}'>{$oneAgency->name}</option>>";
-                        }
+                    foreach($agencyAll as $oneAgency){
+                        echo "<option value='{$oneAgency->id}'>{$oneAgency->name}</option>>";
+                    }
                     ?>
                 </select>
                 <br>
@@ -103,7 +103,9 @@
             description:do_description,
         },function(json){
             if (json.code==0){
-                alert(json);
+                _showMessage('success','添加成功');
+                jqTable.fnDraw(false);
+                $("#addModal").modal('hide');
             }else{
                 _showMessage('error',json.message);
             }
@@ -154,7 +156,55 @@
 
     function _createtable()
     {
-        jqTable=$('#donate-table').dataTable();
+        jqTable=$('#donate-table').dataTable({
+            bFilter:false,
+            bLengthChange:false,
+            bInfo:true,
+            bPaginate:true,
+            bSort:false,
+            iDisplayLength:10,
+            bAutoWidth:false,
+            sPaginationType:'full_numbers',
+
+            bProcessing:true,
+            bServerSide:true,
+            sAjaxSource:"?r=admin/donate/gettable",
+            sServerMethod:"POST",
+            fnServerParams:function(aoData){
+                aoData.push({
+                        "name":"search",
+                        "value":"",
+                    },{
+                        "name":"sendname2",
+                        "value":"sendvalue2",
+                    }
+                );
+            },
+            aoColumns:[
+                {mData:"id"},
+                {mData:"bookname"},
+                {mData:"dornorname"},
+                {mData:"agencyname"},
+                {mData:"donatetime"},
+                {mData:"id",mRender:function(data,type,full){
+                    return "<button>btn</button>";
+                }},
+            ],
+            oLanguage: {
+                sSearch: "模糊查询:",
+                sLengthMenu: "每页显示 _MENU_ 条捐助记录",
+                sZeroRecords: "没有记录",
+                sInfo: "显示第  _START_ 到第  _END_ 条记录,一共  _TOTAL_ 条记录",
+                sInfoEmpty: "显示0条记录",
+                sInfoFiltered: "",
+                oPaginate: {
+                    sFirst:"首页",
+                    sPrevious: " 上一页 ",
+                    sNext:     " 下一页 ",
+                    sLast:     "尾页",
+                }
+            }
+        });
     }
 
 </script>

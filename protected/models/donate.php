@@ -30,7 +30,7 @@ class donate extends CActiveRecord
             $Model_d=self::model()->findByPk(intval($donateInfo["donateid"]));
         }else{
             $Model_d=new self();
-            $Model_d->donatetime=time();
+            $Model_d->donatetime=new CDbExpression('NOW()');
         }
         $Model_d->bookid=$donateInfo["bookid"];
         $Model_d->dornorid=$donateInfo["dornorid"];

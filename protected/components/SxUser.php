@@ -109,7 +109,7 @@ class SxUser
     }
 
     /**
-     * 通过用户名获取用户信息，不存在返回-1
+     * 通过用户名获取用户信息，不存在返回0
      * @param $username
      * @return int
      */
@@ -119,7 +119,7 @@ class SxUser
         if (!empty($user_model)){
             return $user_model->id;
         }else{
-            return -1;
+            return 0;
         }
     }
 
