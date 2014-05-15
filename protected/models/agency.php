@@ -88,12 +88,15 @@ class agency extends CActiveRecord
             'telephone'=>'',
             'worktime'=>'',
             'coordinate'=>'0,0',
+            'longi'=>'0',
+            'lati'=>'0',
             'description'=>'',
         );
         $Model_A=self::model()->findByPk($agencyid);
         if(empty($Model_A)){
             return $nullAgency;
         }else{
+            $coordinate=explode(',',$Model_A->coordinate);
             return array(
                 'id'=>$Model_A->id,
                 'name'=>$Model_A->name,
@@ -103,10 +106,11 @@ class agency extends CActiveRecord
                 'worktime'=>$Model_A->worktime,
                 'coordinate'=>$Model_A->coordinate,
                 'description'=>$Model_A->description,
+                "longi"=>$coordinate[1],
+                "lati"=>$coordinate[0],
             );
         }
     }
-
 }
 
 

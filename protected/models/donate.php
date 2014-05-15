@@ -33,7 +33,7 @@ class donate extends CActiveRecord
             $Model_d->donatetime=new CDbExpression('NOW()');
         }
         $Model_d->bookid=$donateInfo["bookid"];
-        $Model_d->dornorid=$donateInfo["dornorid"];
+        $Model_d->donorid=$donateInfo["donorid"];
         $Model_d->agencyid=$donateInfo["agencyid"];
         $Model_d->description=$donateInfo["description"];
 
@@ -59,7 +59,7 @@ class donate extends CActiveRecord
                 'donatetime'=>'',
                 'description'=>'',
                 'bookinfo'=>book_lib::getBookInfo(0),
-                'dornorinfo'=>user_info::getUserInfo(0),
+                'donorinfo'=>user_info::getUserInfo(0),
                 'agencyinfo'=>agency::getAgencyInfo(0),
                 'tracks'=>array(),
             );
@@ -69,14 +69,10 @@ class donate extends CActiveRecord
                 'donatetime'=>$Model_donate->donatetime,
                 'description'=>$Model_donate->description,
                 'bookinfo'=>book_lib::getBookInfo($Model_donate->bookid),
-                'dornorinfo'=>user_info::getUserInfo($Model_donate->dornorid),
+                'donorinfo'=>user_info::getUserInfo($Model_donate->donorid),
                 'agencyinfo'=>agency::getAgencyInfo($Model_donate->agencyid),
                 "tracks"=>donate_track::getTrack($Model_donate->id),
             );
         }
-
-
     }
-
-
 }

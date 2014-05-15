@@ -35,14 +35,14 @@ class DonateController extends Controller
             $bookname=$bookname["bookname"];
             $agencyname=agency::getAgencyInfo($onedonate->agencyid);
             $agencyname=$agencyname["name"];
-            $donorname=user_info::getUserInfo($onedonate->dornorid);
+            $donorname=user_info::getUserInfo($onedonate->donorid);
             $donorname=$donorname["nickname"];
 
 
             $datas[]=array(
                 'id'=>$onedonate->id,
                 'bookname'=>$bookname,
-                'dornorname'=>$donorname,
+                'donorname'=>$donorname,
                 'agencyname'=>$agencyname,
                 'donatetime'=>$onedonate->donatetime,
             );
@@ -59,20 +59,20 @@ class DonateController extends Controller
     public function actionAdddonate()
     {
         $bookid=intval(Yii::app()->request->getParam('bookid'));
-        $dornoremail=Yii::app()->request->getParam('dornoremail','');
+        $donoremail=Yii::app()->request->getParam('donoremail','');
         $agencyid=intval(Yii::app()->request->getParam('agencyid'));
         $description=Yii::app()->request->getParam('description');
 
         if (empty($dornoremail)) {
-            $dornorid=0;
+            $donorid=0;
         }else{
-            $dornorid=Yii::app()->user->getIdBYUsername($dornoremail);
+            $donorid=Yii::app()->user->getIdBYUsername($donoremail);
         }
         if (isset($bookid)&&isset($agencyid)){
 
             $donateId=donate::recordNewOrChange(array(
                 "bookid"=>$bookid,
-                "dornorid"=>$dornorid,
+                "donorid"=>$donorid,
                 "agencyid"=>$agencyid,
                 "description"=>$description,
             ));

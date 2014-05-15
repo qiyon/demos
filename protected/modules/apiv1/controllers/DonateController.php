@@ -64,8 +64,5 @@ class DonateController extends Controller
             "recordsTotal"=>$donateCount,
             "donates"=>$donateArr,
         ));
-
-
     }
-
 }

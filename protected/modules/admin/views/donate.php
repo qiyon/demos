@@ -98,7 +98,7 @@
         }
         $.post('?r=admin/donate/adddonate',{
             bookid:do_book_id,
-            dornoremail:do_dornor_email,
+            donoremail:do_dornor_email,
             agencyid:do_acc_agency,
             description:do_description,
         },function(json){
@@ -183,7 +183,7 @@
             aoColumns:[
                 {mData:"id"},
                 {mData:"bookname"},
-                {mData:"dornorname"},
+                {mData:"donorname"},
                 {mData:"agencyname"},
                 {mData:"donatetime"},
                 {mData:"id",mRender:function(data,type,full){
