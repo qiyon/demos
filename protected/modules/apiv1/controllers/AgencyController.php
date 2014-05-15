@@ -39,4 +39,17 @@ class AgencyController extends Controller
             "agencys"=>$aArray,
         ));
     }
+
+    public function actionGetinfo()
+    {
+        $agencyId=intval(Yii::app()->request->getParam("agencyid"));
+        $infoarr=agency::getAgencyInfo($agencyId);
+        $coordinate=explode(',',$infoarr["coordinate"]);
+        $infoarr["longi"]=$coordinate[1];
+        $infoarr["lati"]=$coordinate[0];
+        echo json_encode(array(
+            "code"=>0,
+            "info"=>$infoarr,
+        ));
+    }
 }
