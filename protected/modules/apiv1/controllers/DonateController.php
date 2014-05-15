@@ -40,8 +40,9 @@ class DonateController extends Controller
             $strOfBookid="";
 
             foreach ($bookS as $oneBook) {
-                $strOfBookid .=$oneBook->id;
+                $strOfBookid .=$oneBook->id.',';
             }
+
             $condition=array(
                 "condition"=>"find_in_set(bookid,:bookids)",
                 "params"=>array(":bookids"=>$strOfBookid),

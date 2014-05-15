@@ -11,7 +11,7 @@ class IndexController extends Controller
 {
     public $layout="//layouts/adminLayout";
     public function actionIndex(){
-        $this->title = "My index";
+        $this->title = "后台管理";
         $this->render('index');
     }
 
