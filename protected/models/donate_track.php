@@ -17,4 +17,26 @@ class donate_track extends CActiveRecord
     {
         return "donate_track";
     }
+
+
+    public static function getTrack($donateid)
+    {
+        $donateid=intval($donateid);
+
+        $trackM=donate_track::model()->findAll(array(
+            'condition'=>"donateid=:donateid",
+            "params"=>array("donateid"=>$donateid),
+        ));
+        $trackArr=array();
+        foreach ($trackM as $oneTrack) {
+            $trackArr[]=array(
+                "tracktime"=>$oneTrack->tracktime,
+                "information"=>$oneTrack->information,
+            );
+        }
+
+
+        return  $trackArr;
+
+    }
 }

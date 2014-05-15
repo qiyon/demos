@@ -61,6 +61,7 @@ class donate extends CActiveRecord
                 'bookinfo'=>book_lib::getBookInfo(0),
                 'dornorinfo'=>user_info::getUserInfo(0),
                 'agencyinfo'=>agency::getAgencyInfo(0),
+                'tracks'=>array(),
             );
         }else{
             return array(
@@ -70,6 +71,7 @@ class donate extends CActiveRecord
                 'bookinfo'=>book_lib::getBookInfo($Model_donate->bookid),
                 'dornorinfo'=>user_info::getUserInfo($Model_donate->dornorid),
                 'agencyinfo'=>agency::getAgencyInfo($Model_donate->agencyid),
+                "tracks"=>donate_track::getTrack($Model_donate->id),
             );
         }
 
