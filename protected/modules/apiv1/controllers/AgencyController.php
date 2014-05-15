@@ -35,6 +35,8 @@ class AgencyController extends Controller
             );
         }
 
-        echo json_encode($aArray);
+        echo json_encode(array(
+            "agencys"=>$aArray,
+        ));
     }
 }
