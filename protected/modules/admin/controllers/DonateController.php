@@ -63,7 +63,7 @@ class DonateController extends Controller
         $agencyid=intval(Yii::app()->request->getParam('agencyid'));
         $description=Yii::app()->request->getParam('description');
 
-        if (empty($dornoremail)) {
+        if (empty($donoremail)) {
             $donorid=0;
         }else{
             $donorid=Yii::app()->user->getIdBYUsername($donoremail);

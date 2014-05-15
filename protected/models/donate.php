@@ -37,12 +37,22 @@ class donate extends CActiveRecord
         $Model_d->agencyid=$donateInfo["agencyid"];
         $Model_d->description=$donateInfo["description"];
 
-        if ($Model_d->save()){
-            return $Model_d->id;
+        $saveId=$Model_d->save();
+        if ($saveId){
+            $agencyInfo=agency::model()->findByPk($donateInfo["agencyid"]);
+            donate_track::addTrack(array(
+                "donateid"=>$Model_d->id,
+                "information"=>"捐助信息添加进入数据库",
+                "trackcoordinate"=>$agencyInfo->coordinate,
+            ));
+            return $saveId;
         }else{
             return false;
         }
     }
+
+
+
 
     /**
      * 获取捐助信息

@@ -29,14 +29,29 @@ class donate_track extends CActiveRecord
         ));
         $trackArr=array();
         foreach ($trackM as $oneTrack) {
+            $tkCoordinate=explode(',',$oneTrack->trackcoordinate);
             $trackArr[]=array(
                 "tracktime"=>$oneTrack->tracktime,
                 "information"=>$oneTrack->information,
+                "trackcoordinate"=>$oneTrack->trackcoordinate,
+                "tracklongi"=>$tkCoordinate[1],
+                "tracklati"=>$tkCoordinate[0],
             );
         }
 
 
         return  $trackArr;
 
+    }
+
+    public static function addTrack($trackInfo)
+    {
+        $trackM=new self();
+        $trackM->donateid=$trackInfo["donateid"];
+        $trackM->tracktime=new CDbExpression("NOW()");
+        $trackM->information=$trackInfo["information"];
+        $trackM->trackcoordinate=$trackInfo["trackcoordinate"];
+
+        $trackM->save();
     }
 }
