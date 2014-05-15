@@ -50,6 +50,8 @@ class BooklibController extends Controller
                 "tags"=>$bookInfo->tags,
                 "description"=>$bookInfo->description,
             );
+
+
         }
 
         echo json_encode(array(
