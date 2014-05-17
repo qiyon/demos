@@ -111,6 +111,19 @@
 
     });
 
+    function _DelBook($bookid){
+        if (confirm("确定要删除书籍信息吗？")){
+            $.post("?r=admin/booklib/delbook",{bookid:$bookid},function(json){
+                if(json.code==0){
+                    _showMessage("success","删除成功");
+                    JDataTable.fnDraw(false);
+                }else{
+                    _showMessage("error",json.message);
+                }
+            },"json");
+        }
+    }
+
     function _createTable()
     {
         JDataTable=$("#book-table").dataTable({
@@ -144,7 +157,8 @@
                 {mData:"pub_house"},
                 {mData:"ISBN"},
                 {mData:"id",mRender:function(data,type,full){
-                    return "<button>详细</button> <button>修改</button> <button>删除</button>";
+                    return "<button>详细</button> <button>修改</button>"+
+                        " <button class='btn btn-xs btn-warning' onclick='_DelBook("+data+");'>删除</button>";
                 }},
             ],
             oLanguage: {

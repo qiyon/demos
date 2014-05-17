@@ -113,6 +113,27 @@ class BooklibController extends Controller
             'data'=>$boobArray,
         ));
     }
+
+    public function actionDelbook()
+    {
+        $bookid=intval(Yii::app()->request->getParam("bookid"));
+        $delRes=book_lib::bookDelete($bookid);
+        if ($delRes==-1){
+            echo json_encode(array(
+                "code"=>-1,
+                "message"=>"有捐助信息与此书关联，禁止删除",
+            ));
+        }elseif($delRes==1){
+            echo json_encode(array(
+                "code"=>0,
+            ));
+        }else{
+            echo json_encode(array(
+                "code"=>-11,
+                "message"=>"删除失败"
+            ));
+        }
+    }
 }
 
 

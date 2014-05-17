@@ -96,4 +96,19 @@ class DonateController extends Controller
         }
 
     }
+
+    public function actionDeldonate(){
+        $donateId=intval(Yii::app()->request->getParam("donateid"));
+        $delRes=donate::model()->findByPk($donateId)->delete();
+        if ($delRes){
+            echo json_encode(array(
+                'code'=>0
+            ));
+        }else{
+            echo json_encode(array(
+                "code"=>-1,
+                "message"=>"删除失败"
+            ));
+        }
+    }
 }

@@ -153,6 +153,18 @@
         $("#book-choose-div").hide();
     }
 
+    function _donateDel(donateId){
+        if (confirm("确定删除?")){
+            $.post("?r=admin/donate/deldonate",{donateid:donateId},function(json){
+                if (json.code==0){
+                    _showMessage("success","删除成功");
+                    jqTable.fnDraw(false);
+                }else{
+                    _showMessage("error",json.message);
+                }
+            },"json");
+        }
+    }
 
     function _createtable()
     {
@@ -187,7 +199,8 @@
                 {mData:"agencyname"},
                 {mData:"donatetime"},
                 {mData:"id",mRender:function(data,type,full){
-                    return "<button>btn</button>";
+                    return "<a target='_blank' href='?r=index&donateid="+data+"' class='btn btn-info btn-xs'>查看详细</a>"+
+                        " <button class='btn btn-warning btn-xs' onclick='_donateDel("+data+");'>删除</button> ";
                 }},
             ],
             oLanguage: {
