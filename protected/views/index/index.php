@@ -1,6 +1,3 @@
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=iviUKktVw3l8WRUrjyMGGvaG"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/library/CurveLine/1.5/src/CurveLine.min.js"></script>
-
 <div class="container">
     <div class="row">
         <a class="btn btn-primary " href="?r=admin/index/index">后台管理</a>
@@ -10,7 +7,7 @@
         <br>
 
         <?php if (!empty($Dinfo["id"])) { ?>
-        <div class="panel panel-default col-md-4">
+        <div class="panel panel-default col-md-4 col-sm-6 col-xs-12">
             <div class="panel-body">
 
                 <h3><?php echo $Dinfo["bookinfo"]["bookname"];?></h3>
@@ -18,7 +15,21 @@
                 <label>ISBN</label> <?php echo $Dinfo["bookinfo"]["ISBN"];?> <br>
                 <label>出版社</label> <?php echo $Dinfo["bookinfo"]["pub_house"];?> <br>
                 <label>标签</label> <?php echo $Dinfo["bookinfo"]["tags"];?> <br>
-                <label>相关链接</label> <?php echo $Dinfo["bookinfo"]["about_link"];?> <br>
+                <label>相关链接</label>
+                <ul >
+                    <?php
+                        $linkinfo=explode(",",$Dinfo["bookinfo"]["about_link"]);
+                        foreach ($linkinfo as $onel){
+                            $onelinkarr=explode("=>",$onel);
+                            if(isset($onelinkarr[1])){
+                                echo "<li><a target='_blank' href='{$onelinkarr[1]}'>{$onelinkarr[0]}</a></li>";
+                            }else{
+                                echo "<li><a target='_blank' href='{$onelinkarr[0]}'>相关链接</a></li>";
+                            }
+                        }
+
+                    ?>
+                </ul>
                 <dl>
                     <dt>书籍描述</dt>
                     <dd><?php echo $Dinfo["bookinfo"]["description"];?></dd>
@@ -40,7 +51,13 @@
         <div class="col-md-4">
             <div id="baidump"></div>
         </div>
+
+        <div class="panel panel-default col-md-4 col-sm-6 col-xs-12">
+            <?php echo $imgsrc;?>
+        </div>
+
         <?php  } ?>
+
 
     </div>
 </div>
@@ -62,20 +79,6 @@
         });
     });
 
-    function _baiduMP(){
-        // 百度地图API功能
-        var map = new BMap.Map("baidump");
-        map.centerAndZoom(new BMap.Point(118.454, 32.955), 6);
-        map.enableScrollWheelZoom();
-        var beijingPosition=new BMap.Point(116.432045,39.910683),
-            hangzhouPosition=new BMap.Point(120.129721,30.314429),
-            taiwanPosition=new BMap.Point(121.491121,25.127053);
-        var points = [beijingPosition,hangzhouPosition, taiwanPosition];
-
-        var curve = new BMapLib.CurveLine(points, {strokeColor:"blue", strokeWeight:3, strokeOpacity:0.5}); //创建弧线对象
-        map.addOverlay(curve); //添加到地图中
-        curve.enableEditing(); //开启编辑功能
-    }
 </script>
 
 

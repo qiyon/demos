@@ -52,6 +52,6 @@ class donate_track extends CActiveRecord
         $trackM->information=$trackInfo["information"];
         $trackM->trackcoordinate=$trackInfo["trackcoordinate"];
 
-        $trackM->save();
+        return $trackM->save();
     }
 }

@@ -11,6 +11,7 @@
                     <li><a href="?r=index">前台</a></li>
                     <li><a href="?r=admin/booklib/index">书库</a></li>
                     <li><a href="?r=admin/donate/index">捐助</a></li>
+                    <li><a href="?r=admin/agency/index">捐赠点</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a ><?php echo Yii::app()->user->getNickname();?></a></li>

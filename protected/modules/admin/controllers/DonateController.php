@@ -111,4 +111,36 @@ class DonateController extends Controller
             ));
         }
     }
+
+    public function actionAddtrack()
+    {
+        $doanteId=intval(Yii::app()->request->getParam("donateid"));
+        $information=Yii::app()->request->getParam("information");
+        $lati=Yii::app()->request->getParam("lati");
+        $longi=Yii::app()->request->getParam("longi");
+
+        if ( (empty($doanteId)) || (empty($information)) || (empty($lati)) || (empty($longi))  ){
+            echo json_encode(array(
+                "code"=>-1,
+                "message"=>"信息不全"
+            ));
+        }else{
+            $saveRes=donate_track::addTrack(array(
+                "donateid"=>$doanteId,
+                "information"=>$information,
+                "trackcoordinate"=>$lati.','.$longi,
+            ));
+
+            if ($saveRes){
+                echo json_encode(array(
+                    "code"=>0
+                ));
+            }else{
+                echo json_encode(array(
+                    "code"=>-1,
+                    "message"=>"添加失败"
+                ));
+            }
+        }
+    }
 }

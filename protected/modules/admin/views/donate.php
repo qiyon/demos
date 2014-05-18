@@ -80,11 +80,30 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="addtrack">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                添加追踪信息
+                <button class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="track-modal-body"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-defaulta" data-dismiss="modal">关闭</button>
+                <button class="btn btn-primary" id="add-donate-track">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     var jqTable;
 
     _createtable();
+
+
 
     $("#add-donate-handel").click(function(){
         var do_book_id=$('#do-book-id').val();
@@ -153,6 +172,39 @@
         $("#book-choose-div").hide();
     }
 
+    function _add_track(donateId){
+        $("#addtrack").modal("show");
+        var donate_tarck_body=$("#track-modal-body");
+        donate_tarck_body.empty();
+        donate_tarck_body.append("<input type='hidden' id='track-to-donate-id' value='"+donateId+"' >");
+        donate_tarck_body.append("<label>信息</label> <input type='text' id='track-infom' > <br>");
+        donate_tarck_body.append("<label>经度</label> <input type='text' id='track-longi' > <br>");
+        donate_tarck_body.append("<label>纬度</label> <input type='text' id='track-lati' > <br>");
+    }
+
+    $("#add-donate-track").click(function(){
+        var trackInfo=$("#track-infom").val();
+        if (trackInfo==null || trackInfo==""){
+            _showMessage("error","追踪信息不能为空");
+            return false;
+        }
+
+        $.post("?r=admin/donate/addtrack",{
+            donateid:$("#track-to-donate-id").val(),
+            information:$("#track-infom").val(),
+            lati:$("#track-lati").val(),
+            longi:$("#track-longi").val(),
+        },function(json){
+            if(json.code==0){
+                _showMessage("success","添加成功");
+                $("#addtrack").modal("hide");
+            }else{
+                _showMessage("error",json.message);
+            }
+        },"json");
+
+    });
+
     function _donateDel(donateId){
         if (confirm("确定删除?")){
             $.post("?r=admin/donate/deldonate",{donateid:donateId},function(json){
@@ -199,8 +251,9 @@
                 {mData:"agencyname"},
                 {mData:"donatetime"},
                 {mData:"id",mRender:function(data,type,full){
-                    return "<a target='_blank' href='?r=index&donateid="+data+"' class='btn btn-info btn-xs'>查看详细</a>"+
-                        " <button class='btn btn-warning btn-xs' onclick='_donateDel("+data+");'>删除</button> ";
+                    return "<a target='_blank' href='?r=index&donateid="+data+"' class='btn btn-info btn-xs'>查看详细</a>"
+                        +" <button class='btn btn-success btn-xs' onclick='_add_track("+data+");' >添加追踪</button>"
+                        +" <button class='btn btn-warning btn-xs' onclick='_donateDel("+data+");'>删除</button> ";
                 }},
             ],
             oLanguage: {

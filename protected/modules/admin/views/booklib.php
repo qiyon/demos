@@ -47,7 +47,7 @@
                 <input id="add-ISBN" type="text"/><br>
 
                 <label style="min-width: 100px" >相关链接</label>
-                <input id="add-about_link" type="text" placeholder="链接名:地址 用逗号隔开"/><br>
+                <input id="add-about_link" type="text" placeholder="链接名=>地址 用逗号隔开"/><br>
 
                 <label style="min-width: 100px" >书籍标签</label>
                 <input id="add-tags" type="text" placeholder="用逗号隔开"/><br>
