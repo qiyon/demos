@@ -94,7 +94,6 @@ class Controller extends CController
      */
     public function filterLoginAuth($filterChain)
     {
-        echo 1;
         if ( isset($this->getModule()->id) && ($this->getModule()->id=='admin') ){
             if (!in_array($this->action->id,$this->noAuth())){
                 if (! Yii::app()->user->isLogined()){
