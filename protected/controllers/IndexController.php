@@ -20,7 +20,6 @@ class IndexController extends Controller{
 
         //google 二维码api
         $googleQRcodesrc="";
-        echo 1;
         if ( !empty($donateId) ){
             $chl="http://202.115.15.3/sxadmin?r=index/index&donateid=".$donateId;
             $chl=urlencode($chl);
@@ -31,7 +30,8 @@ class IndexController extends Controller{
             $googleQRcodesrc.=  '&cht=qr&chld='.$EC_level.'|'.$margin.'&chl='.$chl.'"';
             $googleQRcodesrc.=' alt="QR code" widhtHeight="'.$widhtHeight.'" widhtHeight="'.$widhtHeight.'"/>';
         }
-        $this->render('index',array("Dinfo"=>$donateInfo,"imgsrc"=>$googleQRcodesrc));
+        echo $googleQRcodesrc;
+        //$this->render('index',array("Dinfo"=>$donateInfo,"imgsrc"=>$googleQRcodesrc));
     }
 
     /**
