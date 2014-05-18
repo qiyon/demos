@@ -28,6 +28,7 @@ class IndexController extends Controller{
             $margin="0";
             $googleQRcodesrc='<img src="http://chart.apis.google.com/chart?chs='.$widhtHeight.'x'.$widhtHeight.'&cht=qr&chld='.$EC_level.'|'.$margin.'&chl='.$chl.'" alt="QR code" widhtHeight="'.$widhtHeight.'" widhtHeight="'.$widhtHeight.'"/>';
         }
+        echo 1;
         $this->render('index',array("Dinfo"=>$donateInfo,"imgsrc"=>$googleQRcodesrc));
     }
 

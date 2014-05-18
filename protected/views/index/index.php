@@ -48,14 +48,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div id="baidump"></div>
-        </div>
 
-        <div class="panel panel-default col-md-4 col-sm-6 col-xs-12">
+        <div class="col-md-4 col-sm-6 col-xs-12">
             <?php
-            if (!empty($imgsrc))
+            if (!empty($imgsrc)){
                 echo $imgsrc;
+            }
             ?>
         </div>
 
