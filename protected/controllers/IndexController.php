@@ -13,10 +13,10 @@ class IndexController extends Controller{
         echo "hehe";
     }
 
-    /**
+    /*
      * 用于生成二维码，暂不使用
      * 现在使用的是googleApi
-     */
+     *
     public function actionGetqrcode()
     {
         $donateId=intval(Yii::app()->request->getParam("donateid"));
@@ -24,5 +24,5 @@ class IndexController extends Controller{
             echo $donateId;
         }
 
-    }
+    } */
 }
