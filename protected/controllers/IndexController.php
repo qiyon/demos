@@ -15,10 +15,7 @@ class IndexController extends Controller{
         //$donateToken=Yii::app()->request->getParam("donatetoken","");
         //书籍上二维码包含的的隐藏信息
         //$bookToken=Yii::app()->request->getParam("booktoken","");
-
         //$donateInfo=donate::getInfo($donateId);
-
-
         //google 二维码api
         $googleQR="";
         //if ( !empty($donateId) ){
