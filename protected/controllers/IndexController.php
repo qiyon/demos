@@ -20,7 +20,7 @@ class IndexController extends Controller{
 
         //google 二维码api
         $googleQRcodesrc="";
-        if (isset($donateId) && (!empty(donate::model()->findByPk($donateId))) ){
+        if ( !empty($donateId) ){
             $chl="http://202.115.15.3/sxadmin?r=index/index&donateid=".$donateId;
             $chl=urlencode($chl);
             $widhtHeight='250';
