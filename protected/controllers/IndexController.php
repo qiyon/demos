@@ -21,7 +21,7 @@ class IndexController extends Controller{
 
         //google 二维码api
         $googleQR="";
-        if ( !empty($donateId) ){
+        //if ( !empty($donateId) ){
             //$chl="http://202.115.15.3/sxadmin?r=index/index&donateid=".$donateId;
             //$chl=urlencode($chl);
             //$widhtHeight='250';
@@ -30,8 +30,8 @@ class IndexController extends Controller{
             //$googleQRcodesrc.='<img src="http://chart.apis.google.com/chart?chs='.$widhtHeight.'x'.$widhtHeight;
             //$googleQRcodesrc.=  '&cht=qr&chld='.$EC_level.'|'.$margin.'&chl='.$chl.'"';
             //$googleQRcodesrc.=' alt="QR code" widhtHeight="'.$widhtHeight.'" widhtHeight="'.$widhtHeight.'"/>';
-        }
-        echo $googleQR."hehe";
+        //}
+        echo $googleQR."hehe".$donateId;
         //$this->render('index',array("Dinfo"=>$donateInfo,"imgsrc"=>$googleQRcodesrc));
     }
 
