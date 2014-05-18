@@ -26,11 +26,11 @@ class IndexController extends Controller{
             $widhtHeight='250';
             $EC_level="M";
             $margin="0";
-            $googleQRcodesrc.='<img src="http://chart.apis.google.com/chart?chs='.$widhtHeight.'x'.$widhtHeight;
-            $googleQRcodesrc.=  '&cht=qr&chld='.$EC_level.'|'.$margin.'&chl='.$chl.'"';
-            $googleQRcodesrc.=' alt="QR code" widhtHeight="'.$widhtHeight.'" widhtHeight="'.$widhtHeight.'"/>';
+            //$googleQRcodesrc.='<img src="http://chart.apis.google.com/chart?chs='.$widhtHeight.'x'.$widhtHeight;
+            //$googleQRcodesrc.=  '&cht=qr&chld='.$EC_level.'|'.$margin.'&chl='.$chl.'"';
+            //$googleQRcodesrc.=' alt="QR code" widhtHeight="'.$widhtHeight.'" widhtHeight="'.$widhtHeight.'"/>';
         }
-        echo $googleQRcodesrc;
+        echo $googleQRcodesrc."hehe";
         //$this->render('index',array("Dinfo"=>$donateInfo,"imgsrc"=>$googleQRcodesrc));
     }
 
