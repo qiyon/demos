@@ -157,7 +157,7 @@
                 {mData:"pub_house"},
                 {mData:"ISBN"},
                 {mData:"id",mRender:function(data,type,full){
-                    return "<button>详细</button> <button>修改</button>"+
+                    return "<button class='btn btn-xs btn-info'>修改</button>"+
                         " <button class='btn btn-xs btn-warning' onclick='_DelBook("+data+");'>删除</button>";
                 }},
             ],

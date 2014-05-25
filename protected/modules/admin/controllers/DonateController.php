@@ -67,6 +67,17 @@ class DonateController extends Controller
             $donorid=0;
         }else{
             $donorid=Yii::app()->user->getIdBYUsername($donoremail);
+            if($donorid==0){
+                $newUserM=new user_info();
+                $newUserM->username=$donoremail;
+                $newUserM->passwd="-1";
+                $newUserM->nickname=$donoremail;
+                $newUserM->token="-1";
+                $newUserM->isadmin=0;
+
+                $newUserM->save();
+                $donorid=$newUserM->id;
+            }
         }
         if (isset($bookid)&&isset($agencyid)){
 

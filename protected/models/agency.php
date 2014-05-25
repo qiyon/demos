@@ -26,7 +26,7 @@ class agency extends CActiveRecord
     public static function agencyAddOrChange($agencyInfo)
     {
         if (isset($agencyInfo["agencyid"])){
-            $agency_model=self::model()->findAllByPk($agencyInfo["agencyid"]);
+            $agency_model=self::model()->findByPk($agencyInfo["agencyid"]);
         }else{
             $agency_model=new self();
         }
