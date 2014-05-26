@@ -56,6 +56,13 @@ class DonateController extends Controller
         ));
     }
 
+    /**
+     * ajax 添加新的捐赠信息
+     * 绑定书籍书籍信息，必须选择一个书籍ID
+     * 绑定用户信息，用户不存在则新建一个用户，填写初始信息，但未激活
+     * 绑定捐赠点信息，必须选择一个捐赠点ID
+     * 添加一条追踪信息
+     */
     public function actionAdddonate()
     {
         $bookid=intval(Yii::app()->request->getParam('bookid'));
@@ -123,6 +130,10 @@ class DonateController extends Controller
         }
     }
 
+    /**
+     * 添加书籍追踪信息，并以json格式返回到前端
+     * 前端根据信息显示效果
+     */
     public function actionAddtrack()
     {
         $doanteId=intval(Yii::app()->request->getParam("donateid"));

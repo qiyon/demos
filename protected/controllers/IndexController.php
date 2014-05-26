@@ -4,7 +4,10 @@ class IndexController extends Controller{
     public  $layout="//layouts/homeLayout";
 
     /**
-     * 后台主页面
+     * 显示捐赠信息搜索页面
+     * 若根据donateid查询捐赠信息，
+     * 并产生符合id号的二维码
+     * 二维码掉调用GoogleApi
      */
     public function actionIndex(){
         $this->title = "捐助查询";

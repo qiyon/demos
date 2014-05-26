@@ -50,10 +50,20 @@ class Controller extends CController
         'united',
         'yeti',
     );
-
+    /**
+     * 默认主题
+     * @var string
+     */
     public $theme="default";
+    /**
+     * 默认标签名
+     * @var string
+     */
     public $title="";
 
+    /**
+     * 判断客户端的请求类型，读取Coookie中的主题信息
+     */
     public  function init()
     {
         if ( isset($_SERVER["HTTP_ACCEPT"]) && stristr($_SERVER["HTTP_ACCEPT"],"application/json") ) {

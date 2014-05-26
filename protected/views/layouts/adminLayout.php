@@ -22,6 +22,7 @@
     </style>
 </head>
 <body>
+    <!-- 加载视图文件部分 -->
     <?php include("adminMenu.php")?>
     <?php echo $content;?>
 

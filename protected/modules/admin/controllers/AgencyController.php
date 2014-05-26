@@ -17,6 +17,9 @@ class AgencyController extends Controller
         return $this->getModule()->getViewPath();
     }
 
+    /**
+     * 读取捐赠点信息并传送到view视图显示
+     */
     public function actionIndex()
     {
         $agenM=agency::model()->findAll();

@@ -9,12 +9,23 @@
 
 class IndexController extends Controller
 {
+    /**
+     * 设置页面布局
+     * @var string
+     */
     public $layout="//layouts/adminLayout";
+
+    /**
+     * 加载视图
+     */
     public function actionIndex(){
         $this->title = "后台管理";
         $this->render('index');
     }
 
+    /**
+     * 设置管理页面主题，将主题选择存储在cookie中，有效期一年
+     */
     public function actionSetTheme()
     {
         $cookie=new CHttpCookie("sx-theme",Yii::app()->request->getParam("theme"));

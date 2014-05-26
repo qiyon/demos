@@ -27,6 +27,10 @@ class BooklibController extends Controller
         $this->render("booklib");
     }
 
+    /**
+     * 获取书籍信息，提供搜索和分页功能
+     * 将信息通过json格式传送到Web端
+     */
     public function actionBookTable()
     {
         $seachBook=Yii::app()->request->getParam("search_book");
@@ -65,6 +69,9 @@ class BooklibController extends Controller
 
     }
 
+    /**
+     * Ajax添加书籍信息，并通过json数据格式返回成功与否的信息到Web端
+     */
     public function actionAddbook()
     {
         if(empty($_POST["bookname"])){
