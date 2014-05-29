@@ -78,7 +78,6 @@
 <script>
     $(document).ready(function(){
 
-        _baiduMP();
 
         $("#donateid-button").click(function(){
             var donateId=$("#search-donate-id").val();

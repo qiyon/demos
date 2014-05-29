@@ -26,6 +26,10 @@ class AgencyController extends Controller
         $this->render("agency",array("agencys"=>$agenM));
     }
 
+    /**
+     * 获取捐赠点想信息
+     * json返回
+     */
     public function actionGetinfo()
     {
         $agencyId=intval(Yii::app()->request->getParam("agencyid"));
@@ -37,6 +41,9 @@ class AgencyController extends Controller
         ));
     }
 
+    /**
+     * 捐赠点信息编辑
+     */
     public function actionEdit()
     {
         if (isset($_POST["agencyid"])){

@@ -1,5 +1,6 @@
 <div class="container">
     <div class="row">
+        <!--列出所有的捐赠点信息 -->
         <?php foreach ($agencys as $oneagen) { ?>
         <div class="panel panel-default col-md-4" style="height: 250px">
             <button class="btn btn-xs btn-warning pull-right" onclick="_delAgency(<?php echo $oneagen->id;?>);">删除</button>
@@ -14,6 +15,7 @@
         </div>
         <?php } ?>
 
+        <!--添加捐赠点-->
         <div class="panel panel-default col-md-4" style="height: 250px">
             <label style="width: 100px">名称</label> <input type="text" id="add-agency-name"><br>
             <label style="width: 100px">联系人</label> <input type="text" id="add-agency-person"><br>
@@ -24,7 +26,6 @@
             <label style="width: 100px">描述</label> <input type="text" id="add-agency-description"><br>
             <label style="width: 100px"></label> <button class="btn btn-success btn-sm" onclick="_addAgency();">添加新捐赠点</button>
         </div>
-
     </div>
 </div>
 
