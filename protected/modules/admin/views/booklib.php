@@ -62,6 +62,45 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="editModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                添加书籍
+                <span class="label label-info">修改书籍信息</span>
+                <button class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="min-height: 250px">
+                <input type="hidden" id="edit-bookid" value="">
+                <label style="min-width: 100px"  >书名</label>
+                <input id="edit-bookname" type="text" placeholder="不能为空"/><br>
+
+                <label style="min-width: 100px" >作者</label>
+                <input id="edit-author" type="text" placeholder="用逗号隔开,译者加(译)"/><br>
+
+                <label style="min-width: 100px" >出版社</label>
+                <input id="edit-pub_house" type="text"/><br>
+
+                <label style="min-width: 100px" >ISBN</label>
+                <input id="edit-ISBN" type="text"/><br>
+
+                <label style="min-width: 100px" >相关链接</label>
+                <input id="edit-about_link" type="text" placeholder="链接名=>地址 用逗号隔开"/><br>
+
+                <label style="min-width: 100px" >书籍标签</label>
+                <input id="edit-tags" type="text" placeholder="用逗号隔开"/><br>
+
+                <label style="min-width: 100px" >书籍说明</label>
+                <textarea id="edit-description" style="height: 150px;width: 350px"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-defaulta" data-dismiss="modal">关闭</button>
+                <button class="btn btn-primary" id="edit-book-handel">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     var JDataTable;
 
@@ -109,7 +148,43 @@
         });
 
 
+        $("#edit-book-handel").click(function(){
+            $.post("?r=admin/booklib/edit",{
+                bookid:$("#edit-bookid").val(),
+                bookname:$("#edit-bookname").val(),
+                author:$("#edit-author").val(),
+                pub_house:$("#edit-pub_house").val(),
+                ISBN:$("#edit-ISBN").val(),
+                about_link:$("#edit-about_link").val(),
+                tags:$("#edit-tags").val(),
+                description:$("#edit-description").val()
+            },function(json){
+                if (json.code==0){
+                    _showMessage("success","修改成功");
+                    $("#editModal").modal("hide");
+                }else{
+                    _showMessage("errot",json.message);
+                }
+
+            },"json");
+        });
+
+
     });
+
+    function _editBook(bookid){
+        $.post("?r=admin/booklib/getinfobyid",{bookid:bookid},function(json){
+            $("#edit-bookid").val(json.id);
+            $("#edit-bookname").val(json.bookname);
+            $("#edit-author").val(json.author);
+            $("#edit-ISBN").val(json.ISBN);
+            $("#edit-pub_house").val(json.pub_house);
+            $("#edit-about_link").val(json.about_link);
+            $("#edit-description").val(json.description);
+            $("#edit-tags").val(json.tags);
+            $("#editModal").modal("show");
+        },"json");
+    }
 
     function _DelBook($bookid){
         if (confirm("确定要删除书籍信息吗？")){
@@ -157,7 +232,7 @@
                 {mData:"pub_house"},
                 {mData:"ISBN"},
                 {mData:"id",mRender:function(data,type,full){
-                    return "<button class='btn btn-xs btn-info'>修改</button>"+
+                    return "<button class='btn btn-xs btn-info' onclick='_editBook("+data+");'>修改</button>"+
                         " <button class='btn btn-xs btn-warning' onclick='_DelBook("+data+");'>删除</button>";
                 }},
             ],

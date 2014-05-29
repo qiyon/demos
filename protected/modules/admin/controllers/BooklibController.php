@@ -141,6 +141,40 @@ class BooklibController extends Controller
             ));
         }
     }
+
+    /**
+     * 通过id获取书籍信息
+     */
+    public function actionGetinfobyid()
+    {
+        $bookid=intval(Yii::app()->request->getParam("bookid"));
+        echo json_encode(book_lib::getBookInfo($bookid));
+    }
+
+
+    /**
+     * 编辑书籍信息
+     */
+    public function actionEdit()
+    {
+        if(empty($_POST["bookname"])){
+            echo json_encode(array(
+                "code"=>-1,
+                "message"=>"书名不能为空",
+            ));
+            return ;
+        }
+        if(book_lib::bookAddOrChange($_POST)){
+            echo json_encode(array(
+                "code"=>0,
+            ));
+        }else{
+            echo json_encode(array(
+                "code"=>-1,
+                "message"=>"编辑失败",
+            ));
+        }
+    }
 }
 
 
