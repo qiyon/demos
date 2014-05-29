@@ -163,7 +163,7 @@
                     _showMessage("success","修改成功");
                     $("#editModal").modal("hide");
                 }else{
-                    _showMessage("errot",json.message);
+                    _showMessage("error",json.message);
                 }
 
             },"json");
