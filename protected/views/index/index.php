@@ -2,7 +2,7 @@
     <div class="row">
         <a class="btn btn-primary " href="?r=admin/index/index">后台管理</a>
         <hr>
-        <input type="text" name="" id="search-donate-id" placeholder="输入二维码上方的ID查询捐助信息"/>
+        <input type="text" name="" id="search-donate-id" style="width: 300px;" placeholder="输入二维码上方的ID查询捐助信息"/>
         <button id="donateid-button" class="btn btn-info btn-xs ">查找</button>
         <br>
 
@@ -57,7 +57,19 @@
             ?>
         </div>
 
-        <?php  } ?>
+        <?php  }else{
+            echo "<br>";
+            $doNUm=donate::model()->count();
+            $bNum=book_lib::model()->count();
+            $aNum=agency::model()->count();
+        ?>
+        <ul class="list-unstyled">当前共有:
+            <li><p class="text-primary">捐赠记录 <?php echo $doNUm; ?> 条。</p></li>
+            <li><p class="text-success">捐赠管理点 <?php echo $aNum;?> 个。</p></li>
+            <li><p class="text-info">记录信息的书籍 <?php echo $bNum?> 本。</p></p></li>
+        </ul>
+        <?php
+        } ?>
 
 
     </div>
