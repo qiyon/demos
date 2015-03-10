@@ -1,2 +1,3 @@
 # pjson
-php json tool
+php json tool.
+Like python's mjson.
