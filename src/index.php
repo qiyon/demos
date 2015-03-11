@@ -26,7 +26,7 @@ class pjson
         while ($loop > 0 ) {
             $this->outJsonStr .= '    ';
             $loop--;
-    }
+        }
         $this->outJsonStr .= $miniStr;
     }
 
