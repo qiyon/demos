@@ -1,6 +1,5 @@
-#!/usr/bin/env php
 <?php
-require( __DIR__.'/pjson.php');
+require( dirname(__FILE__) . '/pjson.php');
 
 $stdinStr = "";
 while (!feof(STDIN)){
@@ -8,7 +7,7 @@ while (!feof(STDIN)){
 }
 $pj = new pjson($stdinStr);
 if ($pj->isLegal()){
-    echo $pj->outStr();
+    echo $pj->outStr() . "\n";
 }else{
     echo "Invalid json string:\n";
     echo $stdinStr;

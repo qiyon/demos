@@ -1,10 +1,20 @@
 <?php
 class pjson
 {
+    /**
+     * @var bool
+     */
     private $legal;
+
+    /**
+     * @var string
+     */
     private $outJsonStr;
 
-    public function __construct($inputStr)
+    /**
+     * @param string $inputStr
+     */
+    public function __construct( $inputStr )
     {
         $getArr = json_decode($inputStr , true);
         if(empty($getArr) && $getArr !== array()){
@@ -15,11 +25,18 @@ class pjson
         }
     }
 
+    /**
+     * @return bool
+     */
     public function isLegal()
     {
         return $this->legal;
     }
 
+    /**
+     * @param string $miniStr
+     * @param int $loop
+     */
     private function addStr($miniStr , $loop = 0)
     {
         while ($loop > 0 ) {
@@ -29,6 +46,10 @@ class pjson
         $this->outJsonStr .= $miniStr;
     }
 
+    /**
+     * @param mixed $getArr
+     * @param int $loop
+     */
     public function dumpJson($getArr , $loop = 0)
     {
         if (!is_array($getArr)){
@@ -68,19 +89,28 @@ class pjson
         }
     }
 
+    /**
+     * @param mixed $var
+     * @return string
+     */
     private function getTypeStr($var)
     {
         if (is_int($var)){
             return $var;
         }else if(is_bool($var)){
             return ($var) ? 'true' : 'false';
+        }else if( $var === null){
+            return 'null';
         }else{
             return '"'.$var.'"';
         }
     }
 
+    /**
+     * @return string
+     */
     public function outStr()
     {
-        return $this->outJsonStr . "\n";
+        return $this->outJsonStr;
     }
 }
