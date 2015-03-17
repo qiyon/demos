@@ -1,9 +1,22 @@
 # pjson
 php json tool, like python's mjson.
 
-Use in linux:
+##shell
+Use in linux shell:
 ```
-cp index.php /usr/local/bin/pjson
+cp pjson.phar /usr/local/bin/pjson
 chmod +x /usr/local/bin/pjson
 echo '{"json":"example"}' | pjson
+```
+##php
+```
+require 'src/pjson.php';
+$pj = new pjson('{"foo":"bar"}');
+$jsonViewString = $pj->outStr();
+
+/* echo $jsonViewString;
+{
+    "foo":"bar"
+}
+*/
 ```
