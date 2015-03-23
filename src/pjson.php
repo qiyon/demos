@@ -95,14 +95,14 @@ class pjson
      */
     private function getTypeStr($var)
     {
-        if (is_int($var)){
-            return $var;
+        if (is_string($var)){
+            return '"'.$var.'"';
         }else if(is_bool($var)){
             return ($var) ? 'true' : 'false';
         }else if( $var === null){
             return 'null';
         }else{
-            return '"'.$var.'"';
+            return $var;
         }
     }
 
