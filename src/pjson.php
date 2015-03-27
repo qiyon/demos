@@ -96,6 +96,7 @@ class pjson
     private function getTypeStr($var)
     {
         if (is_string($var)){
+            $var = addcslashes($var , "\"\n\r\000");
             return '"'.$var.'"';
         }else if(is_bool($var)){
             return ($var) ? 'true' : 'false';
