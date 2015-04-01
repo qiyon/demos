@@ -17,7 +17,7 @@ class pjson
     public function __construct( $inputStr )
     {
         $getArr = json_decode($inputStr , true);
-        if(empty($getArr) && $getArr !== array()){
+        if(!is_array($getArr)){
             $this->legal = false;
         }else{
             $this->legal = true;
