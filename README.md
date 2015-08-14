@@ -1,6 +1,8 @@
-sxadmin
-=======
+#sxadmin
 
-The admin module of sx.
+##关于
+我的毕业设计(2014年4月)，用Yii实现的书籍捐赠管理平台，数据库存储实现、Web端公共前台与管理后台、以及`HTTP`形式的`API`接口。
 
-详细内容请查看ReadMe.php
+##配置
+详细配置内容请查看ReadMe.php
+
