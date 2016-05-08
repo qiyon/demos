@@ -1,0 +1,62 @@
+<?php
+
+use yii\db\Migration;
+use yii\db\Schema;
+
+/**
+ * Handles the creation for table `table`.
+ */
+class m160508_083146_create_tables extends Migration
+{
+    /**
+     * @inheritdoc
+     */
+    public function up()
+    {
+        $this->createTable('user_info', [
+            'id' => $this->primaryKey(),
+            'username' => Schema::TYPE_STRING . ' NOT NULL',
+            'nickname' => Schema::TYPE_STRING,
+            'isadmin' => Schema::TYPE_INTEGER
+        ]);
+        $this->createTable('donate', [
+            'id' => Schema::TYPE_PK,
+            'donatetime' => Schema::TYPE_DATETIME,
+            'description' => Schema::TYPE_STRING,
+            'bookid' => Schema::TYPE_INTEGER,
+            'donorid' => Schema::TYPE_INTEGER,
+            'agencyid' => Schema::TYPE_INTEGER
+        ]);
+        $this->createTable('book_lib', [
+            'id' => Schema::TYPE_PK,
+            'bookname' => Schema::TYPE_STRING,
+            'author' => Schema::TYPE_STRING,
+            'ISBN' => Schema::TYPE_STRING,
+            'pub_house' => Schema::TYPE_STRING,
+            'about_link' => Schema::TYPE_STRING,
+            'description' => Schema::TYPE_STRING,
+            'tags' => Schema::TYPE_STRING,
+        ]);
+        $this->createTable('agency', [
+            'id' => Schema::TYPE_PK,
+            'name' => Schema::TYPE_STRING,
+            'person' => Schema::TYPE_STRING,
+            'address' => Schema::TYPE_STRING,
+            'telephone' => Schema::TYPE_STRING,
+            'worktime' => Schema::TYPE_STRING,
+            'coordinate' => Schema::TYPE_STRING,
+            'description' => Schema::TYPE_STRING,
+        ]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function down()
+    {
+        $this->dropTable('user_info');
+        $this->dropTable('donate');
+        $this->dropTable('book_lib');
+        $this->dropTable('agency');
+    }
+}

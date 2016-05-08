@@ -1,5 +1,8 @@
 <?php
 namespace app\models;
+
+use yii\db\ActiveRecord as CActiveRecord;
+
 /**
  * Created by PhpStorm.
  * User: heqiyon
@@ -8,16 +11,10 @@ namespace app\models;
  */
 class Agency extends CActiveRecord
 {
-    public static function model($className=__CLASS__)
-    {
-        return parent::model($className);
-    }
-
-    public function tableName()
+    public static function tableName()
     {
         return "agency";
     }
-
 
     /**
      * 捐助点添加或修改
@@ -26,23 +23,23 @@ class Agency extends CActiveRecord
      */
     public static function agencyAddOrChange($agencyInfo)
     {
-        if (isset($agencyInfo["agencyid"])){
-            $agency_model=self::model()->findByPk($agencyInfo["agencyid"]);
-        }else{
-            $agency_model=new self();
+        if (isset($agencyInfo["agencyid"])) {
+            $agency_model = self::model()->findByPk($agencyInfo["agencyid"]);
+        } else {
+            $agency_model = new self();
         }
 
-        $agency_model->name=$agencyInfo["name"];
-        $agency_model->person=$agencyInfo["person"];
-        $agency_model->address=$agencyInfo["address"];
-        $agency_model->telephone=$agencyInfo["telephone"];
-        $agency_model->worktime=$agencyInfo["worktime"];
-        $agency_model->coordinate=$agencyInfo["coordinate"];
-        $agency_model->description=$agencyInfo["description"];
+        $agency_model->name = $agencyInfo["name"];
+        $agency_model->person = $agencyInfo["person"];
+        $agency_model->address = $agencyInfo["address"];
+        $agency_model->telephone = $agencyInfo["telephone"];
+        $agency_model->worktime = $agencyInfo["worktime"];
+        $agency_model->coordinate = $agencyInfo["coordinate"];
+        $agency_model->description = $agencyInfo["description"];
 
-        if ( $agency_model->save() ){
+        if ($agency_model->save()) {
             return $agency_model->id;
-        }else{
+        } else {
             return false;
         }
 
@@ -58,17 +55,17 @@ class Agency extends CActiveRecord
      * @param $agencyid
      * @return int
      */
-    public  static function agencyDelete($agencyid)
+    public static function agencyDelete($agencyid)
     {
-        $agencyid=intval($agencyid);
-        if(donate::model()->count("agencyid=:agencyid",array(":agencyid"=>$agencyid))>0){
+        $agencyid = intval($agencyid);
+        if (donate::model()->count("agencyid=:agencyid", array(":agencyid" => $agencyid)) > 0) {
             return -1;
         }
 
-        $agencyModel=self::model()->findByPk($agencyid);
-        if ( $agencyModel->delete() ){
+        $agencyModel = self::model()->findByPk($agencyid);
+        if ($agencyModel->delete()) {
             return 1;
-        }else{
+        } else {
             return 0;
         }
     }
@@ -80,35 +77,35 @@ class Agency extends CActiveRecord
      */
     public static function getAgencyInfo($agencyid)
     {
-        $agencyid=intval($agencyid);
-        $nullAgency=array(
-            'id'=>0,
-            'name'=>'暂无信息',
-            'person'=>'',
-            'address'=>'',
-            'telephone'=>'',
-            'worktime'=>'',
-            'coordinate'=>'0,0',
-            'longi'=>'0',
-            'lati'=>'0',
-            'description'=>'',
+        $agencyid = intval($agencyid);
+        $nullAgency = array(
+            'id' => 0,
+            'name' => '暂无信息',
+            'person' => '',
+            'address' => '',
+            'telephone' => '',
+            'worktime' => '',
+            'coordinate' => '0,0',
+            'longi' => '0',
+            'lati' => '0',
+            'description' => '',
         );
-        $Model_A=self::model()->findByPk($agencyid);
-        if(empty($Model_A)){
+        $Model_A = self::find()->where(['id' => $agencyid])->one();
+        if (empty($Model_A)) {
             return $nullAgency;
-        }else{
-            $coordinate=explode(',',$Model_A->coordinate);
+        } else {
+            $coordinate = explode(',', $Model_A->coordinate);
             return array(
-                'id'=>$Model_A->id,
-                'name'=>$Model_A->name,
-                'person'=>$Model_A->person,
-                'address'=>$Model_A->address,
-                'telephone'=>$Model_A->telephone,
-                'worktime'=>$Model_A->worktime,
-                'coordinate'=>$Model_A->coordinate,
-                'description'=>$Model_A->description,
-                "longi"=>$coordinate[1],
-                "lati"=>$coordinate[0],
+                'id' => $Model_A->id,
+                'name' => $Model_A->name,
+                'person' => $Model_A->person,
+                'address' => $Model_A->address,
+                'telephone' => $Model_A->telephone,
+                'worktime' => $Model_A->worktime,
+                'coordinate' => $Model_A->coordinate,
+                'description' => $Model_A->description,
+                "longi" => $coordinate[1],
+                "lati" => $coordinate[0],
             );
         }
     }

@@ -1,21 +1,17 @@
 <?php
 namespace app\models;
+
+use yii\db\ActiveRecord as CActiveRecord;
+
 /**
  * Created by PhpStorm.
  * User: heqiyon
  * Date: 5/5/14
  * Time: 8:59 PM
  */
-
 class UserInfo extends CActiveRecord
 {
-    public static  function model($className=__CLASS__)
-    {
-        return parent::model($className);
-    }
-
-
-    public  function tableName()
+    public static function tableName()
     {
         return "user_info";
     }
@@ -27,22 +23,22 @@ class UserInfo extends CActiveRecord
      */
     public static function getUserInfo($userid)
     {
-        $userid=intval($userid);
-        $nullInfo=array(
-            'id'=>0,
-            'username'=>'nothing',
-            'nickname'=>'无信息',
-            'isadmin'=>0,
+        $userid = intval($userid);
+        $nullInfo = array(
+            'id' => 0,
+            'username' => 'nothing',
+            'nickname' => '无信息',
+            'isadmin' => 0,
         );
-        $Model_U=self::model()->findByPk($userid);
-        if(empty($Model_U)){
+        $Model_U = self::find()->where(['id' => $userid])->one();
+        if (empty($Model_U)) {
             return $nullInfo;
-        }else{
+        } else {
             return array(
-                'id'=>$Model_U->id,
-                'username'=>$Model_U->username,
-                'nickname'=>$Model_U->nickname,
-                'isadmin'=>$Model_U->isadmin,
+                'id' => $Model_U->id,
+                'username' => $Model_U->username,
+                'nickname' => $Model_U->nickname,
+                'isadmin' => $Model_U->isadmin,
             );
         }
     }

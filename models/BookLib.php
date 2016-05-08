@@ -1,21 +1,17 @@
 <?php
 namespace app\models;
+
+use yii\db\ActiveRecord as CActiveRecord;
+
 /**
  * Created by PhpStorm.
  * User: heqiyon
  * Date: 5/7/14
  * Time: 2:04 PM
  */
-
 class BookLib extends CActiveRecord
 {
-    public static  function model($className=__CLASS__)
-    {
-        return parent::model($className);
-    }
-
-
-    public  function tableName()
+    public static function tableName()
     {
         return "book_lib";
     }
@@ -28,24 +24,24 @@ class BookLib extends CActiveRecord
      */
     public static function bookAddOrChange($bookInfo)
     {
-        if(isset($bookInfo['bookid']) ){
-            $booklib_model=self::model()->find("id=:id",array(":id"=>$bookInfo["bookid"]));
-        }else{
-            $booklib_model=new self();
+        if (isset($bookInfo['bookid'])) {
+            $booklib_model = self::model()->find("id=:id", array(":id" => $bookInfo["bookid"]));
+        } else {
+            $booklib_model = new self();
         }
-        $booklib_model->bookname=$bookInfo["bookname"];
-        $booklib_model->author=$bookInfo["author"];
-        $booklib_model->pub_house=$bookInfo["pub_house"];
-        $booklib_model->ISBN=$bookInfo["ISBN"];
-        $booklib_model->about_link=$bookInfo["about_link"];
-        $booklib_model->tags=$bookInfo["tags"];
-        $booklib_model->description=$bookInfo["description"];
+        $booklib_model->bookname = $bookInfo["bookname"];
+        $booklib_model->author = $bookInfo["author"];
+        $booklib_model->pub_house = $bookInfo["pub_house"];
+        $booklib_model->ISBN = $bookInfo["ISBN"];
+        $booklib_model->about_link = $bookInfo["about_link"];
+        $booklib_model->tags = $bookInfo["tags"];
+        $booklib_model->description = $bookInfo["description"];
 
-         if($booklib_model->save()){
-             return $booklib_model->id;
-         }else{
-             return false;
-         }
+        if ($booklib_model->save()) {
+            return $booklib_model->id;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -58,16 +54,16 @@ class BookLib extends CActiveRecord
      */
     public static function bookDelete($bookid)
     {
-        $bookid=intval($bookid);
-        $donate_count=donate::model()->count("bookid=:bookid",array(":bookid"=>$bookid));
-        if ($donate_count>0){
+        $bookid = intval($bookid);
+        $donate_count = donate::model()->count("bookid=:bookid", array(":bookid" => $bookid));
+        if ($donate_count > 0) {
             return -1;
         }
 
-        $book_model=self::model()->find("id=:id",array(":id"=>$bookid));
-        if($book_model->delete()){
+        $book_model = self::model()->find("id=:id", array(":id" => $bookid));
+        if ($book_model->delete()) {
             return 1;
-        }else{
+        } else {
             return 0;
         }
     }
@@ -80,31 +76,31 @@ class BookLib extends CActiveRecord
      */
     public static function getBookInfo($bookid)
     {
-        $bookid=intval($bookid);
-        $nullbook=array(
-            'id'=>0,
-            'bookname'=>'无记录',
-            'author'=>'无记录',
-            'ISBN'=>'',
-            'pub_house'=>'',
-            'about_link'=>'',
-            'description'=>'',
-            'tags'=>'',
+        $bookid = intval($bookid);
+        $nullbook = array(
+            'id' => 0,
+            'bookname' => '无记录',
+            'author' => '无记录',
+            'ISBN' => '',
+            'pub_house' => '',
+            'about_link' => '',
+            'description' => '',
+            'tags' => '',
 
         );
-        $Model_b=self::model()->findByPk($bookid);
-        if (empty($Model_b)){
+        $Model_b = self::find()->where(['id' => $bookid])->one();
+        if (empty($Model_b)) {
             return $nullbook;
-        }else{
+        } else {
             return array(
-                'id'=>$Model_b->id,
-                'bookname'=>$Model_b->bookname,
-                'author'=>$Model_b->author,
-                'ISBN'=>$Model_b->ISBN,
-                'pub_house'=>$Model_b->pub_house,
-                'about_link'=>$Model_b->about_link,
-                'description'=>$Model_b->description,
-                'tags'=>$Model_b->tags,
+                'id' => $Model_b->id,
+                'bookname' => $Model_b->bookname,
+                'author' => $Model_b->author,
+                'ISBN' => $Model_b->ISBN,
+                'pub_house' => $Model_b->pub_house,
+                'about_link' => $Model_b->about_link,
+                'description' => $Model_b->description,
+                'tags' => $Model_b->tags,
             );
         }
     }
