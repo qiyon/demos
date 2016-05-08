@@ -1,18 +1,17 @@
 <?php
-
 use app\models\Donate;
 use app\models\BookLib;
 use app\models\Agency;
 
+$this->registerJsFile('/js/app/index/index.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 <div class="container">
     <div class="row">
-        <a class="btn btn-primary " href="?r=admin/index/index">后台管理</a>
+        <a class="btn btn-primary " href="/admin/index/index">后台管理</a>
         <hr>
         <input type="text" name="" id="search-donate-id" style="width: 300px;" placeholder="输入二维码上方的ID查询捐助信息"/>
         <button id="donateid-button" class="btn btn-info btn-xs ">查找</button>
         <br>
-
         <?php if (!empty($Dinfo["id"])) { ?>
             <div class="panel panel-default col-md-4 col-sm-6 col-xs-12">
                 <div class="panel-body">
@@ -34,7 +33,6 @@ use app\models\Agency;
                                 echo "<li><a target='_blank' href='{$onelinkarr[0]}'>相关链接</a></li>";
                             }
                         }
-
                         ?>
                     </ul>
                     <dl>
@@ -77,27 +75,6 @@ use app\models\Agency;
             </ul>
             <?php
         } ?>
-
-
     </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-
-
-        $("#donateid-button").click(function () {
-            var donateId = $("#search-donate-id").val();
-            window.location = "?r=index&donateid=" + donateId;
-        });
-
-        $("#search-donate-id").keydown(function (e) {
-            if (e.keyCode == 13) {
-                $("#donateid-button").click();
-            }
-        });
-    });
-
-</script>
-
 

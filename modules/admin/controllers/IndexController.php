@@ -1,6 +1,7 @@
 <?php
 namespace app\modules\admin\controllers;
 
+use Yii;
 use yii\web\Controller;
 
 class IndexController extends Controller
@@ -9,26 +10,14 @@ class IndexController extends Controller
      * 设置页面布局
      * @var string
      */
-    public $layout = "//layouts/adminLayout";
+    public $layout = "adminLayout";
 
     /**
      * 加载视图
      */
     public function actionIndex()
     {
-        $this->title = "后台管理";
-        $this->render('index');
-    }
-
-    /**
-     * 设置管理页面主题，将主题选择存储在cookie中，有效期一年
-     */
-    public function actionSetTheme()
-    {
-        $cookie = new CHttpCookie("sx-theme", Yii::app()->request->getParam("theme"));
-        $cookie->expire = time() + 365 * 24 * 60 * 60;
-        Yii::app()->request->cookies["sx-theme"] = $cookie;
-        echo 0;
+        return $this->render('index');
     }
 
     /**
@@ -38,13 +27,13 @@ class IndexController extends Controller
     {
         $this->layout = "";
         $this->title = "Login";
-        $url = Yii::app()->request->getParam('url');
-        $username = Yii::app()->request->getParam('username');
-        $passwd = Yii::app()->request->getParam('passwd');
+        $url = Yii::$app->request->get('url');
+        $username = Yii::$app->request->get('username');
+        $passwd = Yii::$app->request->get('passwd');
         if (!empty($username)) {
-            if (Yii::app()->user->loginAuth($username, $passwd)) {
-                $remember = intval(Yii::app()->request->getParam('remember', '0'));
-                Yii::app()->user->login($username, $remember);
+            if (Yii::$app->user->loginAuth($username, $passwd)) {
+                $remember = intval(Yii::$app->request->get('remember', '0'));
+                Yii::$app->user->login($username, $remember);
                 if (empty($url)) {
                     header("Location:?r=index/index");
                 } else {
@@ -66,7 +55,8 @@ class IndexController extends Controller
      */
     public function actionLogout()
     {
-        Yii::app()->user->logout();
-        header("Location:" . LOGIN_URL);
+        Yii::$app->user->logout();
+//        header("Location:" . '/admin/index/login');
+        return $this->redirect('/admin/index/login');
     }
 }

@@ -3,11 +3,11 @@ namespace app\controllers;
 
 use yii\web\Controller;
 use app\models\Donate;
+use Yii;
 
 class IndexController extends Controller
 {
     public $layout = "homeLayout";
-
 
     /**
      * 显示捐赠信息搜索页面
@@ -17,13 +17,11 @@ class IndexController extends Controller
      */
     public function actionIndex()
     {
-//        $donateId = intval(Yii::app()->request->getParam("donateid", ""));
-        $donateId = '';
+        $donateId = intval(Yii::$app->request->get("donateid", ""));
         //捐助者获取的捐书凭证上二维码包含的隐藏token信息
-//        $donateToken = Yii::app()->request->getParam("donatetoken", "");
-        $donateToken = '';
+//        $donateToken = Yii::$app->request->get("donatetoken", "");
         //书籍上二维码包含的的隐藏信息
-//        $bookToken = Yii::app()->request->getParam("booktoken", "");
+//        $bookToken = Yii::$app->request->get("booktoken", "");
         $donateInfo = Donate::getInfo($donateId);
         //google 二维码api
         $googleQRcodesrc = "";

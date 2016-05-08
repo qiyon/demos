@@ -6,7 +6,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'defaultRoute' => 'index',
+    'defaultRoute' => 'index/index',
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module'
@@ -16,6 +16,13 @@ $config = [
         ]
     ],
     'components' => [
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                '<module:[\w-]+>/<controller:[\w-]+>/<id:\d+>' => '<module>/<controller>/<action>',
+            ]
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'mSLR0jwZuztOGvYDgSTvA8JwnPwHaCOA',
