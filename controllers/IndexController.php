@@ -6,9 +6,8 @@ use app\models\Donate;
 
 class IndexController extends Controller
 {
-    public $layout = "//layouts/homeLayout";
+    public $layout = "homeLayout";
 
-    public $title = '';
 
     /**
      * 显示捐赠信息搜索页面
@@ -18,7 +17,6 @@ class IndexController extends Controller
      */
     public function actionIndex()
     {
-        $this->title = "捐助查询";
 //        $donateId = intval(Yii::app()->request->getParam("donateid", ""));
         $donateId = '';
         //捐助者获取的捐书凭证上二维码包含的隐藏token信息
@@ -39,6 +37,6 @@ class IndexController extends Controller
             $googleQRcodesrc .= '&cht=qr&chld=' . $EC_level . '|' . $margin . '&chl=' . $chl . '"';
             $googleQRcodesrc .= ' alt="QR code" widhtHeight="' . $widhtHeight . '" widhtHeight="' . $widhtHeight . '"/>';
         }
-        $this->render('index', array("Dinfo" => $donateInfo, "imgsrc" => $googleQRcodesrc));
+        return $this->render('index', array("Dinfo" => $donateInfo, "imgsrc" => $googleQRcodesrc));
     }
 }

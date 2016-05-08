@@ -1,3 +1,10 @@
+<?php
+
+use app\models\Donate;
+use app\models\BookLib;
+use app\models\Agency;
+
+?>
 <div class="container">
     <div class="row">
         <a class="btn btn-primary " href="?r=admin/index/index">后台管理</a>
@@ -7,68 +14,68 @@
         <br>
 
         <?php if (!empty($Dinfo["id"])) { ?>
-        <div class="panel panel-default col-md-4 col-sm-6 col-xs-12">
-            <div class="panel-body">
+            <div class="panel panel-default col-md-4 col-sm-6 col-xs-12">
+                <div class="panel-body">
 
-                <h3><?php echo $Dinfo["bookinfo"]["bookname"];?></h3>
-                <label>作者</label> <?php echo $Dinfo["bookinfo"]["author"];?> <br>
-                <label>ISBN</label> <?php echo $Dinfo["bookinfo"]["ISBN"];?> <br>
-                <label>出版社</label> <?php echo $Dinfo["bookinfo"]["pub_house"];?> <br>
-                <label>标签</label> <?php echo $Dinfo["bookinfo"]["tags"];?> <br>
-                <label>相关链接</label>
-                <ul >
-                    <?php
-                        $linkinfo=explode(",",$Dinfo["bookinfo"]["about_link"]);
-                        foreach ($linkinfo as $onel){
-                            $onelinkarr=explode("=>",$onel);
-                            if(isset($onelinkarr[1])){
+                    <h3><?php echo $Dinfo["bookinfo"]["bookname"]; ?></h3>
+                    <label>作者</label> <?php echo $Dinfo["bookinfo"]["author"]; ?> <br>
+                    <label>ISBN</label> <?php echo $Dinfo["bookinfo"]["ISBN"]; ?> <br>
+                    <label>出版社</label> <?php echo $Dinfo["bookinfo"]["pub_house"]; ?> <br>
+                    <label>标签</label> <?php echo $Dinfo["bookinfo"]["tags"]; ?> <br>
+                    <label>相关链接</label>
+                    <ul>
+                        <?php
+                        $linkinfo = explode(",", $Dinfo["bookinfo"]["about_link"]);
+                        foreach ($linkinfo as $onel) {
+                            $onelinkarr = explode("=>", $onel);
+                            if (isset($onelinkarr[1])) {
                                 echo "<li><a target='_blank' href='{$onelinkarr[1]}'>{$onelinkarr[0]}</a></li>";
-                            }else{
+                            } else {
                                 echo "<li><a target='_blank' href='{$onelinkarr[0]}'>相关链接</a></li>";
                             }
                         }
 
-                    ?>
-                </ul>
-                <dl>
-                    <dt>书籍描述</dt>
-                    <dd><?php echo $Dinfo["bookinfo"]["description"];?></dd>
-                </dl>
-                <label>捐助者</label> <?php echo $Dinfo["donorinfo"]["nickname"];?> <br>
-                <label>捐赠点</label> <?php echo $Dinfo["agencyinfo"]["name"];?> <br>
-                <label>捐助描述</label> <?php echo $Dinfo["description"];?> <br>
-                <label>捐助记录</label>
-                <div class="well">
-                    <?php foreach ($Dinfo["tracks"] as $oneT) { ?>
-                        <dl>
-                            <dt><?php echo $oneT["information"];?></dt>
-                            <dd> --<?php echo $oneT["tracktime"];?></dd>
-                        </dl>
-                    <?php } ?>
+                        ?>
+                    </ul>
+                    <dl>
+                        <dt>书籍描述</dt>
+                        <dd><?php echo $Dinfo["bookinfo"]["description"]; ?></dd>
+                    </dl>
+                    <label>捐助者</label> <?php echo $Dinfo["donorinfo"]["nickname"]; ?> <br>
+                    <label>捐赠点</label> <?php echo $Dinfo["agencyinfo"]["name"]; ?> <br>
+                    <label>捐助描述</label> <?php echo $Dinfo["description"]; ?> <br>
+                    <label>捐助记录</label>
+                    <div class="well">
+                        <?php foreach ($Dinfo["tracks"] as $oneT) { ?>
+                            <dl>
+                                <dt><?php echo $oneT["information"]; ?></dt>
+                                <dd> --<?php echo $oneT["tracktime"]; ?></dd>
+                            </dl>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-4 col-sm-6 col-xs-12">
-            <?php
-            if (!empty($imgsrc)){
-                echo $imgsrc;
-            }
-            ?>
-        </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <?php
+                if (!empty($imgsrc)) {
+                    echo $imgsrc;
+                }
+                ?>
+            </div>
 
-        <?php  }else{
+        <?php } else {
             echo "<br>";
-            $doNUm=donate::model()->count();
-            $bNum=book_lib::model()->count();
-            $aNum=agency::model()->count();
-        ?>
-        <ul class="list-unstyled">当前共有:
-            <li><p class="text-primary">捐赠记录 <?php echo $doNUm; ?> 条。</p></li>
-            <li><p class="text-success">捐赠管理点 <?php echo $aNum;?> 个。</p></li>
-            <li><p class="text-info">记录信息的书籍 <?php echo $bNum?> 本。</p></p></li>
-        </ul>
-        <?php
+            $doNUm = Donate::find()->count();
+            $bNum = BookLib::find()->count();
+            $aNum = Agency::find()->count();
+            ?>
+            <ul class="list-unstyled">当前共有:
+                <li><p class="text-primary">捐赠记录 <?php echo $doNUm; ?> 条。</p></li>
+                <li><p class="text-success">捐赠管理点 <?php echo $aNum; ?> 个。</p></li>
+                <li><p class="text-info">记录信息的书籍 <?php echo $bNum ?> 本。</p></p></li>
+            </ul>
+            <?php
         } ?>
 
 
@@ -76,16 +83,16 @@
 </div>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
 
 
-        $("#donateid-button").click(function(){
-            var donateId=$("#search-donate-id").val();
-            window.location="?r=index&donateid="+donateId;
+        $("#donateid-button").click(function () {
+            var donateId = $("#search-donate-id").val();
+            window.location = "?r=index&donateid=" + donateId;
         });
 
-        $("#search-donate-id").keydown(function(e){
-            if(e.keyCode==13){
+        $("#search-donate-id").keydown(function (e) {
+            if (e.keyCode == 13) {
                 $("#donateid-button").click();
             }
         });
