@@ -1,11 +1,11 @@
 <?php
 namespace app\controllers;
 
-use yii\web\Controller;
-use app\models\Donate;
 use Yii;
+use app\components\BaseController;
+use app\models\Donate;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     public $layout = "homeLayout";
 

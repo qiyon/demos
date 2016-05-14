@@ -2,11 +2,11 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use yii\web\Controller;
+use app\components\BaseController;
 use app\models\Agency;
 use app\models\Donate;
 
-class AgencyController extends Controller
+class AgencyController extends BaseController
 {
     public $layout = "adminLayout";
 

@@ -3,13 +3,13 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use app\models\DonateTrack;
-use yii\web\Controller;
+use app\components\BaseController;
 use app\models\Agency;
 use app\models\Donate;
 use app\models\UserInfo;
 use app\models\BookLib;
 
-class DonateController extends Controller
+class DonateController extends BaseController
 {
     public $title = "捐助管理";
     public $layout = "adminLayout";

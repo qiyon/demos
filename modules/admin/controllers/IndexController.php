@@ -2,10 +2,10 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use yii\web\Controller;
+use app\components\BaseController;
 use app\models\UserInfo;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     /**
      * 设置页面布局

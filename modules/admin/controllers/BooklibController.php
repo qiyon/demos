@@ -2,10 +2,10 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use yii\web\Controller;
+use app\components\BaseController;
 use app\models\BookLib;
 
-class BooklibController extends Controller
+class BooklibController extends BaseController
 {
     public $layout = "adminLayout";
 
