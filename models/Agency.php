@@ -24,11 +24,10 @@ class Agency extends CActiveRecord
     public static function agencyAddOrChange($agencyInfo)
     {
         if (isset($agencyInfo["agencyid"])) {
-            $agency_model = self::model()->findByPk($agencyInfo["agencyid"]);
+            $agency_model = self::findOne($agencyInfo["agencyid"]);
         } else {
             $agency_model = new self();
         }
-
         $agency_model->name = $agencyInfo["name"];
         $agency_model->person = $agencyInfo["person"];
         $agency_model->address = $agencyInfo["address"];
@@ -36,13 +35,11 @@ class Agency extends CActiveRecord
         $agency_model->worktime = $agencyInfo["worktime"];
         $agency_model->coordinate = $agencyInfo["coordinate"];
         $agency_model->description = $agencyInfo["description"];
-
         if ($agency_model->save()) {
             return $agency_model->id;
         } else {
             return false;
         }
-
     }
 
     /**
