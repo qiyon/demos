@@ -32,10 +32,9 @@ class DonateTrack extends CActiveRecord
     {
         $trackM = new self();
         $trackM->donateid = $trackInfo["donateid"];
-        $trackM->tracktime = new CDbExpression("NOW()");
+        $trackM->tracktime = date('Y-m-d H:i:s', time());
         $trackM->information = $trackInfo["information"];
         $trackM->trackcoordinate = $trackInfo["trackcoordinate"];
-
         return $trackM->save();
     }
 }

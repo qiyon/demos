@@ -25,8 +25,8 @@ class IndexController extends Controller
      */
     public function actionLogin()
     {
-        $this->layout = "";
-        $this->title = "Login";
+        $this->layout = null;
+//        $this->title = "Login";
         $url = Yii::$app->request->get('url');
         $username = Yii::$app->request->get('username');
         $passwd = Yii::$app->request->get('passwd');
@@ -40,13 +40,13 @@ class IndexController extends Controller
                     header("Location:?r={$url}");
                 }
             } else {
-                $this->render("login", array(
+                return $this->render("login", array(
                     'errortype' => 'warning',
                     'message' => '用户名或密码错误！'
                 ));
             }
         } else {
-            $this->render("login");
+            return $this->render("login");
         }
     }
 

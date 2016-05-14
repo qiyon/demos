@@ -19,14 +19,6 @@ class m160508_083146_create_tables extends Migration
             'nickname' => Schema::TYPE_STRING,
             'isadmin' => Schema::TYPE_INTEGER
         ]);
-        $this->createTable('donate', [
-            'id' => Schema::TYPE_PK,
-            'donatetime' => Schema::TYPE_DATETIME,
-            'description' => Schema::TYPE_STRING,
-            'bookid' => Schema::TYPE_INTEGER,
-            'donorid' => Schema::TYPE_INTEGER,
-            'agencyid' => Schema::TYPE_INTEGER
-        ]);
         $this->createTable('book_lib', [
             'id' => Schema::TYPE_PK,
             'bookname' => Schema::TYPE_STRING,
@@ -47,6 +39,21 @@ class m160508_083146_create_tables extends Migration
             'coordinate' => Schema::TYPE_STRING,
             'description' => Schema::TYPE_STRING,
         ]);
+        $this->createTable('donate', [
+            'id' => Schema::TYPE_PK,
+            'donatetime' => Schema::TYPE_DATETIME,
+            'description' => Schema::TYPE_STRING,
+            'bookid' => Schema::TYPE_INTEGER,
+            'donorid' => Schema::TYPE_INTEGER,
+            'agencyid' => Schema::TYPE_INTEGER
+        ]);
+        $this->createTable('donate_track', [
+            'id' => Schema::TYPE_PK,
+            'donateid' => Schema::TYPE_INTEGER,
+            'tracktime' => Schema::TYPE_DATETIME,
+            'information' => Schema::TYPE_STRING,
+            'trackcoordinate' => Schema::TYPE_STRING,
+        ]);
     }
 
     /**
@@ -55,8 +62,9 @@ class m160508_083146_create_tables extends Migration
     public function down()
     {
         $this->dropTable('user_info');
-        $this->dropTable('donate');
         $this->dropTable('book_lib');
         $this->dropTable('agency');
+        $this->dropTable('donate');
+        $this->dropTable('donate_track');
     }
 }

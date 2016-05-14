@@ -25,7 +25,9 @@ class BookLib extends CActiveRecord
     public static function bookAddOrChange($bookInfo)
     {
         if (isset($bookInfo['bookid'])) {
-            $booklib_model = self::model()->find("id=:id", array(":id" => $bookInfo["bookid"]));
+            $booklib_model = self::find()
+                ->where('id = :id', [':id' => $bookInfo["bookid"]])
+                ->one();
         } else {
             $booklib_model = new self();
         }
@@ -36,7 +38,6 @@ class BookLib extends CActiveRecord
         $booklib_model->about_link = $bookInfo["about_link"];
         $booklib_model->tags = $bookInfo["tags"];
         $booklib_model->description = $bookInfo["description"];
-
         if ($booklib_model->save()) {
             return $booklib_model->id;
         } else {
@@ -55,19 +56,19 @@ class BookLib extends CActiveRecord
     public static function bookDelete($bookid)
     {
         $bookid = intval($bookid);
-        $donate_count = donate::model()->count("bookid=:bookid", array(":bookid" => $bookid));
+        $donate_count = Donate::find()
+            ->where("bookid = :bookid", [":bookid" => $bookid])
+            ->count();
         if ($donate_count > 0) {
             return -1;
         }
-
-        $book_model = self::model()->find("id=:id", array(":id" => $bookid));
+        $book_model = self::findOne($bookid);
         if ($book_model->delete()) {
             return 1;
         } else {
             return 0;
         }
     }
-
 
     /**
      * 通过书籍Id获取书籍信息，无法查询时也返回空信息
