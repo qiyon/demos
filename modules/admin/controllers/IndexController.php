@@ -3,6 +3,7 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use yii\web\Controller;
+use app\models\UserInfo;
 
 class IndexController extends Controller
 {
@@ -25,18 +26,18 @@ class IndexController extends Controller
      */
     public function actionLogin()
     {
-        $url = Yii::$app->request->get('url');
-        $username = Yii::$app->request->get('username');
-        $passwd = Yii::$app->request->get('passwd');
+        $url = Yii::$app->request->post('url');
+        $username = Yii::$app->request->post('username');
+        $passwd = Yii::$app->request->post('passwd');
+        $remember = intval(Yii::$app->request->post('remember', 0));
         if (!empty($username)) {
-            if (Yii::$app->user->loginAuth($username, $passwd)) {
-                $remember = intval(Yii::$app->request->get('remember', '0'));
-                Yii::$app->user->login($username, $remember);
-                if (empty($url)) {
-                    header("Location:?r=index/index");
-                } else {
-                    header("Location:?r={$url}");
-                }
+            $identityObj = UserInfo::find()
+                ->where('username = :username', [':username' => $username])
+                ->one();
+            if ($identityObj && UserInfo::checkPassword($passwd, $identityObj->passwd)) {
+                Yii::$app->user->login($identityObj, $remember ? 7 * 24 * 3600 : 0);
+                if (empty($url)) $url = "/admin";
+                return $this->redirect($url);
             } else {
                 return $this->render("login", array(
                     'errortype' => 'warning',

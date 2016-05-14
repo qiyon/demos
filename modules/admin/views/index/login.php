@@ -2,6 +2,8 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3" style="margin-top: 150px">
             <form class="form-horizontal" role="form" method="post">
+                <input type="hidden" name="<?php echo Yii::$app->request->csrfParam; ?>"
+                       value="<?php echo Yii::$app->request->csrfToken; ?>">
                 <div class="form-group">
                     <label for="username" class="col-sm-2 control-label">用户名</label>
                     <div class="col-sm-10">

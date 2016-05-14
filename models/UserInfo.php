@@ -1,16 +1,10 @@
 <?php
 namespace app\models;
 
+use Yii;
 use yii\db\ActiveRecord as CActiveRecord;
 
-/**
- * Created by PhpStorm.
- * User: heqiyon
- * Date: 5/5/14
- * Time: 8:59 PM
- */
-class UserInfo extends CActiveRecord
-//    implements \yii\web\IdentityInterface
+class UserInfo extends CActiveRecord implements \yii\web\IdentityInterface
 {
     public static function tableName()
     {
@@ -44,29 +38,36 @@ class UserInfo extends CActiveRecord
         }
     }
 
-//    //---------   \yii\web\IdentityInterface functions -----------------
-//    public static function findIdentity($id)
-//    {
-//        return self::findOne($id);
-//    }
-//
-//    public static function findIdentityByAccessToken($token, $type = null)
-//    {
-//        return null;
-//    }
-//
-//    public function getId()
-//    {
-//        return $this->id;
-//    }
-//
-//    public function getAuthKey()
-//    {
-//        return md5('sxamdinAuthKey' . $this->getId());
-//    }
-//
-//    public function validateAuthKey($authKey)
-//    {
-//        return $this->getAuthKey() === $authKey;
-//    }
+    public static function checkPassword($inputPassword, $dbPassword)
+    {
+        Yii::info('md5: ' . md5(Yii::$app->params['sxUserSlat'] . $inputPassword));
+        Yii::info('db:' . $dbPassword);
+        return !!(md5(Yii::$app->params['sxUserSlat'] . $inputPassword) === $dbPassword);
+    }
+
+    //---------   \yii\web\IdentityInterface functions -----------------
+    public static function findIdentity($id)
+    {
+        return self::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        return null;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getAuthKey()
+    {
+        return md5('sxamdinAuthKey' . $this->getId());
+    }
+
+    public function validateAuthKey($authKey)
+    {
+        return $this->getAuthKey() === $authKey;
+    }
 }

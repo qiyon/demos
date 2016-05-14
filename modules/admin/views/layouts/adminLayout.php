@@ -20,7 +20,7 @@ $this->registerJsFile('/js/app/Util.js', ['depends' => [\yii\web\JqueryAsset::cl
     <title>书香-后台管理</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?= \yii\helpers\Html::csrfMetaTags() ?>
+    <?php echo \yii\helpers\Html::csrfMetaTags(); ?>
     <!--    <link type="text/css" href="/js/bootwatch/default/bootstrap.min.css" rel="stylesheet">-->
     <!--    <script src="/js/jquery.min.js" type="text/javascript"></script>-->
     <style type="text/css">
