@@ -75,17 +75,13 @@ class BooklibController extends Controller
 
     public function actionGetlist()
     {
-        $searchBook = Yii::$app->request->get('search', '');
-        if (empty($searchBook)) {
-            $condition = array();
-        } else {
-            $condition = array(
-                'condition' => 'bookname like :bookname',
-                'params' => array(':bookname' => '%' . $searchBook . '%'),
-            );
+        $searchBook = Yii::$app->request->post('search', '');
+        $query = BookLib::find();
+        if (!empty($searchBook)) {
+            $query->where('bookname like :bookname', array(':bookname' => '%' . $searchBook . '%'));
         }
-        $condition["order"] = 'id desc';
-        $bookList = BookLib::model()->findAll($condition);
+        $query->orderBy('id desc');
+        $bookList = $query->all();
         $boobArray = array();
         foreach ($bookList as $onebook) {
             $boobArray[] = array(

@@ -13,7 +13,7 @@ class DonateTrack extends CActiveRecord
     public static function getTrack($donateid)
     {
         $donateid = intval($donateid);
-        $trackM = self::find()->where(['donateid' => $donateid])->one();
+        $trackM = self::find()->where(['donateid' => $donateid])->all();
         $trackArr = array();
         foreach ($trackM as $oneTrack) {
             $tkCoordinate = explode(',', $oneTrack->trackcoordinate);

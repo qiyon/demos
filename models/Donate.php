@@ -30,10 +30,10 @@ class Donate extends CActiveRecord
     public static function recordNewOrChange($donateInfo)
     {
         if (isset($donateInfo["donateid"])) {
-            $Model_d = self::model()->findByPk(intval($donateInfo["donateid"]));
+            $Model_d = self::findOne(intval($donateInfo["donateid"]));
         } else {
             $Model_d = new self();
-            $Model_d->donatetime = new CDbExpression('NOW()');
+            $Model_d->donatetime = date('Y-m-d H:i:s', time());
         }
         $Model_d->bookid = $donateInfo["bookid"];
         $Model_d->donorid = $donateInfo["donorid"];
@@ -42,7 +42,7 @@ class Donate extends CActiveRecord
 
         $saveId = $Model_d->save();
         if ($saveId) {
-            $agencyInfo = Agency::model()->findByPk($donateInfo["agencyid"]);
+            $agencyInfo = Agency::findOne($donateInfo["agencyid"]);
             donate_track::addTrack(array(
                 "donateid" => $Model_d->id,
                 "information" => "捐助信息添加进入数据库",

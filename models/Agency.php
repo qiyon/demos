@@ -87,7 +87,7 @@ class Agency extends CActiveRecord
             'lati' => '0',
             'description' => '',
         );
-        $Model_A = self::find()->where(['id' => $agencyid])->one();
+        $Model_A = self::findOne($agencyid);
         if (empty($Model_A)) {
             return $nullAgency;
         } else {

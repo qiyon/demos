@@ -30,7 +30,7 @@ class UserInfo extends CActiveRecord
             'nickname' => '无信息',
             'isadmin' => 0,
         );
-        $Model_U = self::find()->where(['id' => $userid])->one();
+        $Model_U = self::findOne($userid);
         if (empty($Model_U)) {
             return $nullInfo;
         } else {

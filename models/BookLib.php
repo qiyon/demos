@@ -89,7 +89,7 @@ class BookLib extends CActiveRecord
             'tags' => '',
 
         );
-        $Model_b = self::find()->where(['id' => $bookid])->one();
+        $Model_b = self::findOne($bookid);
         if (empty($Model_b)) {
             return $nullbook;
         } else {
