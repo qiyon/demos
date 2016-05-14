@@ -95,7 +95,7 @@ class BooklibController extends Controller
                 'ISBN' => $onebook->ISBN,
             );
         }
-        echo json_encode(array(
+        return json_encode(array(
             'code' => 0,
             'data' => $boobArray,
         ));
