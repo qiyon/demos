@@ -25,8 +25,6 @@ class IndexController extends Controller
      */
     public function actionLogin()
     {
-        $this->layout = null;
-//        $this->title = "Login";
         $url = Yii::$app->request->get('url');
         $username = Yii::$app->request->get('username');
         $passwd = Yii::$app->request->get('passwd');
@@ -56,7 +54,6 @@ class IndexController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-//        header("Location:" . '/admin/index/login');
         return $this->redirect('/admin/index/login');
     }
 }

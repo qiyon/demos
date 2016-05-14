@@ -1,11 +1,3 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>管理登陆</title>
-    <link type="text/css" href="/js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3" style="margin-top: 150px">
@@ -46,9 +38,4 @@
         </div>
     </div>
 </div>
-</body>
-<script src="/js/jquery.min.js" type="text/javascript"></script>
-<script src="/js/bootstrap/js/bootstrap.min.js"
-        type="text/javascript"></script>
-</html>
 

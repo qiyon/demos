@@ -16,7 +16,9 @@ class m160508_083146_create_tables extends Migration
         $this->createTable('user_info', [
             'id' => $this->primaryKey(),
             'username' => Schema::TYPE_STRING . ' NOT NULL',
+            'passwd' => Schema::TYPE_STRING,
             'nickname' => Schema::TYPE_STRING,
+            'token' => Schema::TYPE_STRING,
             'isadmin' => Schema::TYPE_INTEGER
         ]);
         $this->createTable('book_lib', [

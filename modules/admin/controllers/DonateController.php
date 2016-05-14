@@ -1,8 +1,8 @@
 <?php
 namespace app\modules\admin\controllers;
 
-use app\models\DonateTrack;
 use Yii;
+use app\models\DonateTrack;
 use yii\web\Controller;
 use app\models\Agency;
 use app\models\Donate;
@@ -70,9 +70,10 @@ class DonateController extends Controller
         if (empty($donoremail)) {
             $donorid = 0;
         } else {
-//            todo
-//            $donorid = Yii::$app->user->getIdBYUsername($donoremail);
-            $donorid = 0;
+            $donorObj = UserInfo::find()
+                ->where('username = :username', [':username' => $donoremail])
+                ->one();
+            $donorid = ($donorObj) ? $donorObj->id : 0;
             if ($donorid == 0) {
                 $newUserM = new UserInfo();
                 $newUserM->username = $donoremail;
