@@ -38,10 +38,10 @@ php yii migrate
 ```
 php yii serve
 ```
-即可以访问`localhost:8080`查看页面。
+即可以访问`http://localhost:8080`查看页面。
 
 如果`8080`端口已被占用，可以使用`--port=<portNum>`制定其它端口，如使用`18001`端口：
 ```
 php yii serve --port=18001
 ```
-即可以访问`localhost:18001`查看页面。
+即可以访问`http://localhost:18001`查看页面。
