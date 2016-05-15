@@ -32,6 +32,7 @@ composer install
 ```
 php yii migrate
 ```
+并有初始化管理员账户密码`admin@admin.com : admin`。
 
 ### 搭建Web服务并访问页面
 访问页面需要搭建web服务器，可以使用`Yii 2`自带开发环境web服务器(基于`php 5.4 web serve`)，执行命令:

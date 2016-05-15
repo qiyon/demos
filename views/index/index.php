@@ -7,7 +7,7 @@ $this->registerJsFile('/js/app/index/index.js', ['depends' => [\yii\web\JqueryAs
 ?>
 <div class="container">
     <div class="row">
-        <a class="btn btn-primary " href="/admin/index/index">后台管理</a>
+        <a class="btn btn-primary " href="/admin">后台管理</a>
         <hr>
         <input type="text" name="" id="search-donate-id" style="width: 300px;" placeholder="输入二维码上方的ID查询捐助信息"/>
         <button id="donateid-button" class="btn btn-info btn-xs ">查找</button>

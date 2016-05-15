@@ -21,6 +21,14 @@ class m160508_083146_create_tables extends Migration
             'token' => Schema::TYPE_STRING,
             'isadmin' => Schema::TYPE_INTEGER
         ]);
+        $this->insert('user_info', [
+            'id' => 1,
+            'username' => 'admin@admin.com',
+            'passwd' => '1a029978c071a13cb55b0917d0c4cfdb',
+            'nickname' => 'admin',
+            'token' => '-1',
+            'isadmin' => 1
+        ]);
         $this->createTable('book_lib', [
             'id' => Schema::TYPE_PK,
             'bookname' => Schema::TYPE_STRING,
