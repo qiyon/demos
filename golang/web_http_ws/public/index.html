@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GO lang WebSocket</title>
+</head>
+
+<body>
+<h1>Web Socket Test</h1>
+</body>
+
+<script language="javascript" type="text/javascript">
+    var ws = new WebSocket('ws://127.0.0.1:18300/socket');
+    ws.onopen = function (evt) {
+        console.log('evt open');
+        ws.send('test');
+    };
+    ws.onmessage = function (evt) {
+        console.log('MSG: ' + evt.data)
+    };
+</script>
+</html>
