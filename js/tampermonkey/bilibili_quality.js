@@ -10,14 +10,13 @@
 (function() {
     'use strict';
     var step_ms = 1000;
-    var max_time = 20 * 1000;
-    var counter = 0;
+    var left_ms = 20 * 1000;
     selectQuality();
     function selectQuality(){
-        counter += step_ms;
+        left_ms -= step_ms;
         var list = $('.bilibili-player-video-btn-quality').find('.bpui-selectmenu-list-row');
         if (list.length === 0) {
-            if (counter <= max_time) setTimeout(selectQuality, step_ms);
+            if (left_ms >= 0) setTimeout(selectQuality, step_ms);
         } else {
             list.get(list.length - 1).click();
         }
