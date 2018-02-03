@@ -5,6 +5,7 @@
 ```
 touch file.txt
 go run main.go
+## An other terminal
 curl -X POST -F "name=xxx" -F "file=@file.txt" 127.0.0.1:8080/upload
 ```
 
@@ -13,6 +14,7 @@ curl -X POST -F "name=xxx" -F "file=@file.txt" 127.0.0.1:8080/upload
 Create a new big file
 
 ```
+## Mac OS
 mkfile 512m file.txt
 ```
 
@@ -24,4 +26,5 @@ curl -X POST -F "name=xxx" -F "file=@file.txt" --limit-rate 50m 127.0.0.1:8080/u
 
 ## conclusion
 
-Golang http, resolve the html multipart/form-data input and file info, after get all data from client 
+Golang http, resolve the html multipart/form-data input and file info, after get all data from client
+
