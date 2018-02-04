@@ -7,6 +7,7 @@ import "os"
 import "io"
 
 func uploadHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(time.Now().Unix())
 	fmt.Println("method:", r.Method)
 	if r.Method == "POST" {
 		name := r.PostFormValue("name")
