@@ -35,7 +35,7 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	//http.HandleFunc("/upload", uploadHandler)
 	//http.ListenAndServe(":8080", nil)
-	var mux = new(http.ServeMux)
+	var mux = http.NewServeMux()
 	mux.HandleFunc("/upload", uploadHandler)
 	//http.ListenAndServe(":8080", mux)
 	//var server = &http.Server{Addr: ":8080", Handler: mux}
