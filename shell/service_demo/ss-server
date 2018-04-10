@@ -1,0 +1,73 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          ss-server
+# Required-Start:    $local_fs $network $named $time $syslog
+# Required-Stop:     $local_fs $network $named $time $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Description:       shrpx proxy
+### END INIT INFO
+
+PROG="/usr/local/bin/ssserver -c /root/config/shadow.json --log-file /root/log/shadow.log -d start"
+PIDFILE=/var/run/shadowsocks.pid
+
+start() {
+  if [ -f $PIDFILE ]; then
+    if ! pgrep $PROG; then
+        echo "Terminate abnormaly last time!"
+        rm -f $PIDFILE
+    else
+        echo 'Service already running' >&2
+        return 1
+    fi
+  fi
+
+  if [ -n "$PIDFILE" ];then
+    PIDFILE="&1"
+  fi
+
+  echo 'Starting service...'
+
+  if $PROG; then
+    echo 'Service started'
+  else
+    echo 'Start failed!' >&2
+  fi
+}
+
+stop() {
+  if [ ! -f "$PIDFILE" ]; then
+    echo 'Service not running' >&2
+    return 1
+  fi
+  echo 'Stopping service…' >&1
+  kill -KILL $(cat "$PIDFILE")
+  rm -f "$PIDFILE"
+  echo 'Service stopped' >&1
+}
+
+status(){
+    if [ -f "$PIDFILE" ];then
+        echo "$PROG is running"
+    else
+        echo "$PROG is stopped"
+    fi
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  retart)
+    stop
+    start
+    ;;
+  status)
+    status
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|status|restart}"
+esac
