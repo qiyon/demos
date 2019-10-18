@@ -1,0 +1,13 @@
+## ~/.gitconfig 
+
+[alias]
+        st = status
+        ci = commit
+        br = branch
+        co = checkout
+	origin-co = "!sh -c \"git checkout -b $1 origin/$1\" -"
+	upr = remote update origin --prune
+[pager]
+        branch = false
+        tag = false
+

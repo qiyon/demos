@@ -1,0 +1,7 @@
+## ~/.tmux.conf 
+
+set -g base-index 1
+setw -g pane-base-index 1
+set-option -g status-position top
+set-option -g allow-rename off
+
