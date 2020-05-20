@@ -11,4 +11,6 @@
 [pager]
         branch = false
         tag = false
+[core]
+	excludesfile = /path/to/global/.gitignore
 
