@@ -9,6 +9,7 @@
         upr = remote update origin --prune
         noci-merge = git merge --no-commit --no-ff
         sync-tag = "!sh -c \"git tag -l | xargs git tag -d && git fetch -t -p -f\" -"
+        fd-clean = "!sh -c \"git checkout -- . && git clean -fd\" -"
 [pager]
         branch = false
         tag = false
