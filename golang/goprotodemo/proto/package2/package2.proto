@@ -1,7 +1,8 @@
 syntax = "proto3";
-package package2;
+
+package demo.app.package2;
 
 message Package2Request {
-    string StrKey=1;
-    string StrKey2=2;
+  string StrKey = 1;
+  string StrKey2 = 2;
 }

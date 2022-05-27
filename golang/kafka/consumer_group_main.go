@@ -3,11 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/Shopify/sarama"
 	"os"
 	"os/signal"
 	"sync"
 	"syscall"
+
+	"github.com/Shopify/sarama"
 )
 
 func main() {

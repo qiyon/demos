@@ -7,12 +7,13 @@
 // @match        https://www.bilibili.com/*
 // @grant        none
 // ==/UserScript==
-(function() {
+(function () {
     'use strict';
     var step_ms = 1000;
     var left_ms = 20 * 1000;
     selectQuality();
-    function selectQuality(){
+
+    function selectQuality() {
         left_ms -= step_ms;
         var list = $('.bilibili-player-video-btn-quality').find('.bpui-selectmenu-list-row');
         if (list.length === 0) {
@@ -22,4 +23,3 @@
         }
     }
 })();
-

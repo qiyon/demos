@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/beanstalkd/go-beanstalk"
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/beanstalkd/go-beanstalk"
 )
 
 func main() {
@@ -31,7 +32,7 @@ func main() {
 				continue
 			}
 
-			// do some thing
+			// do something ...
 			fmt.Printf("beanstalk data: %s\n", string(body))
 
 			if err := conn.Delete(id); nil != err {
