@@ -1,11 +1,9 @@
 syntax = "proto3";
 
 package demo.app.package1;
-
 option go_package = "goprotodemo/proto/package1";
 
 message Req {
   string strField = 1;
   int32 intField = 2;
 }
-
