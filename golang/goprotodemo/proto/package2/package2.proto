@@ -5,8 +5,17 @@ option go_package = "goprotodemo/proto/package2";
 
 import "proto/package1/package1.proto";
 
+// grpc service demo
+service PkgTwo {
+  // grpc method demo
+  rpc Hello (Req) returns (Resp);
+}
+
 message Req {
   string no = 1;
   string name = 2;
+  // import other proto file demo
   demo.app.package1.Req packageOneReq = 3;
 }
+
+message Resp {}
