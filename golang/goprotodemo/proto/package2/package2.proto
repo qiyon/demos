@@ -1,8 +1,14 @@
 syntax = "proto3";
 
+import "proto/package1/package1.proto";
+
 package demo.app.package2;
 
-message Package2Request {
-  string StrKey = 1;
-  string StrKey2 = 2;
+option go_package = "goprotodemo/proto/package2";
+
+message Req {
+  string no = 1;
+  string name = 2;
+  demo.app.package1.Req packageOneReq = 3;
 }
+
