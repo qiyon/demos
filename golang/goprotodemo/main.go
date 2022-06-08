@@ -9,8 +9,13 @@ import (
 )
 
 func main() {
-	msg := package2.Req{
-		PackageOneReq: &package1.Req{},
+	msg := &package2.Req{
+		No:   "no",
+		Name: "name",
+		PackageOneReq: &package1.Req{
+			StrField: "str",
+			IntField: 1,
+		},
 	}
 	j, _ := json.Marshal(msg)
 	fmt.Println(string(j))
