@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models;
 
 use yii\db\ActiveRecord as CActiveRecord;
@@ -78,31 +79,31 @@ class BookLib extends CActiveRecord
     public static function getBookInfo($bookid)
     {
         $bookid = intval($bookid);
-        $nullbook = array(
-            'id' => 0,
-            'bookname' => '无记录',
-            'author' => '无记录',
-            'ISBN' => '',
-            'pub_house' => '',
-            'about_link' => '',
+        $nullbook = [
+            'id'          => 0,
+            'bookname'    => '无记录',
+            'author'      => '无记录',
+            'ISBN'        => '',
+            'pub_house'   => '',
+            'about_link'  => '',
             'description' => '',
-            'tags' => '',
+            'tags'        => '',
 
-        );
+        ];
         $Model_b = self::findOne($bookid);
         if (empty($Model_b)) {
             return $nullbook;
         } else {
-            return array(
-                'id' => $Model_b->id,
-                'bookname' => $Model_b->bookname,
-                'author' => $Model_b->author,
-                'ISBN' => $Model_b->ISBN,
-                'pub_house' => $Model_b->pub_house,
-                'about_link' => $Model_b->about_link,
+            return [
+                'id'          => $Model_b->id,
+                'bookname'    => $Model_b->bookname,
+                'author'      => $Model_b->author,
+                'ISBN'        => $Model_b->ISBN,
+                'pub_house'   => $Model_b->pub_house,
+                'about_link'  => $Model_b->about_link,
                 'description' => $Model_b->description,
-                'tags' => $Model_b->tags,
-            );
+                'tags'        => $Model_b->tags,
+            ];
         }
     }
 

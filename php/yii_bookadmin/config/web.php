@@ -23,14 +23,6 @@ $config = [
                 '<module:[\w-]+>/<controller:[\w-]+>/<id:\d+>' => '<module>/<controller>/<action>',
             ]
         ],
-        'assetManager' => [
-            'bundles' => [
-                'yii\bootstrap\BootstrapAsset' => [
-                    'css' => ['css/bootstrap.css'],
-                    'js' => ['js/bootstrap.min.js']
-                ],
-            ],
-        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'mSLR0jwZuztOGvYDgSTvA8JwnPwHaCOA',

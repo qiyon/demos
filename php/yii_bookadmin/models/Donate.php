@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models;
 
 use yii\db\ActiveRecord as CActiveRecord;
@@ -43,11 +44,11 @@ class Donate extends CActiveRecord
         $saveId = $Model_d->save();
         if ($saveId) {
             $agencyInfo = Agency::findOne($donateInfo["agencyid"]);
-            donate_track::addTrack(array(
-                "donateid" => $Model_d->id,
-                "information" => "捐助信息添加进入数据库",
+            donate_track::addTrack([
+                "donateid"        => $Model_d->id,
+                "information"     => "捐助信息添加进入数据库",
                 "trackcoordinate" => $agencyInfo->coordinate,
-            ));
+            ]);
             return $saveId;
         } else {
             return false;
@@ -65,25 +66,25 @@ class Donate extends CActiveRecord
         $donateid = intval($donateid);
         $Model_donate = self::find()->where(['id' => $donateid])->one();
         if (empty($Model_donate)) {
-            return array(
-                'id' => 0,
-                'donatetime' => '',
+            return [
+                'id'          => 0,
+                'donatetime'  => '',
                 'description' => '',
-                'bookinfo' => book_lib::getBookInfo(0),
-                'donorinfo' => user_info::getUserInfo(0),
-                'agencyinfo' => Agency::getAgencyInfo(0),
-                'tracks' => array(),
-            );
+                'bookinfo'    => book_lib::getBookInfo(0),
+                'donorinfo'   => user_info::getUserInfo(0),
+                'agencyinfo'  => Agency::getAgencyInfo(0),
+                'tracks'      => [],
+            ];
         } else {
-            return array(
-                'id' => $Model_donate->id,
-                'donatetime' => $Model_donate->donatetime,
+            return [
+                'id'          => $Model_donate->id,
+                'donatetime'  => $Model_donate->donatetime,
                 'description' => $Model_donate->description,
-                'bookinfo' => book_lib::getBookInfo($Model_donate->bookid),
-                'donorinfo' => user_info::getUserInfo($Model_donate->donorid),
-                'agencyinfo' => Agency::getAgencyInfo($Model_donate->agencyid),
-                "tracks" => donate_track::getTrack($Model_donate->id),
-            );
+                'bookinfo'    => book_lib::getBookInfo($Model_donate->bookid),
+                'donorinfo'   => user_info::getUserInfo($Model_donate->donorid),
+                'agencyinfo'  => Agency::getAgencyInfo($Model_donate->agencyid),
+                "tracks"      => donate_track::getTrack($Model_donate->id),
+            ];
         }
     }
 }

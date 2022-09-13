@@ -1,4 +1,5 @@
 <?php
+
 namespace app\modules\admin\controllers;
 
 use Yii;
@@ -18,7 +19,7 @@ class AgencyController extends BaseController
     public function actionIndex()
     {
         $agenM = Agency::find()->all();
-        return $this->render("agency", array("agencys" => $agenM));
+        return $this->render("agency", ["agencys" => $agenM]);
     }
 
     /**
@@ -29,10 +30,10 @@ class AgencyController extends BaseController
     {
         $agencyId = intval(Yii::$app->request->post("agencyid"));
         $info = Agency::getAgencyInfo($agencyId);
-        return json_encode(array(
+        return json_encode([
             "code" => 0,
             "info" => $info,
-        ));
+        ]);
     }
 
     /**
@@ -45,14 +46,14 @@ class AgencyController extends BaseController
         }
 
         if (!empty($resV)) {
-            return json_encode(array(
-                "code" => 0
-            ));
+            return json_encode([
+                "code" => 0,
+            ]);
         } else {
-            return json_encode(array(
-                "code" => -1,
-                "message" => "修改失败"
-            ));
+            return json_encode([
+                "code"    => -1,
+                "message" => "修改失败",
+            ]);
         }
     }
 
@@ -60,22 +61,22 @@ class AgencyController extends BaseController
     {
         $agencyid = intval(Yii::$app->request->post("agencyid"));
         $donate_count = Donate::find()
-            ->where("agencyid=:aid", array(":aid" => $agencyid))
+            ->where("agencyid=:aid", [":aid" => $agencyid])
             ->count();
         if ($donate_count > 0) {
-            return json_encode(array(
-                "code" => -1,
-                "message" => "有捐助信息与此书关联，不允删除"
-            ));
+            return json_encode([
+                "code"    => -1,
+                "message" => "有捐助信息与此书关联，不允删除",
+            ]);
         } else {
             $agencyM = Agency::findOne($agencyid);
             if ($agencyM->delete()) {
-                return json_encode(array("code" => 0));
+                return json_encode(["code" => 0]);
             } else {
-                return json_encode(array(
-                    "code" => -1,
-                    "message" => "删除失败"
-                ));
+                return json_encode([
+                    "code"    => -1,
+                    "message" => "删除失败",
+                ]);
             }
         }
     }
@@ -84,7 +85,7 @@ class AgencyController extends BaseController
     {
         if (!empty($_POST)) {
             Agency::agencyAddOrChange($_POST);
-            return json_encode(array("code" => 0));
+            return json_encode(["code" => 0]);
         }
     }
 }

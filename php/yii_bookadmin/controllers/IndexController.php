@@ -1,4 +1,5 @@
 <?php
+
 namespace app\controllers;
 
 use Yii;
@@ -35,6 +36,6 @@ class IndexController extends BaseController
             $googleQRcodesrc .= '&cht=qr&chld=' . $EC_level . '|' . $margin . '&chl=' . $chl . '"';
             $googleQRcodesrc .= ' alt="QR code" widhtHeight="' . $widhtHeight . '" widhtHeight="' . $widhtHeight . '"/>';
         }
-        return $this->render('index', array("Dinfo" => $donateInfo, "imgsrc" => $googleQRcodesrc));
+        return $this->render('index', ["Dinfo" => $donateInfo, "imgsrc" => $googleQRcodesrc]);
     }
 }

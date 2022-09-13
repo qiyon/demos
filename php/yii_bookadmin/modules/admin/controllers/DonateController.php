@@ -1,4 +1,5 @@
 <?php
+
 namespace app\modules\admin\controllers;
 
 use Yii;
@@ -18,7 +19,7 @@ class DonateController extends BaseController
     public function actionIndex()
     {
         $agencyModel = Agency::find()->all();
-        return $this->render("donate", array('agencyAll' => $agencyModel));
+        return $this->render("donate", ['agencyAll' => $agencyModel]);
     }
 
     public function actionGettable()
@@ -29,7 +30,7 @@ class DonateController extends BaseController
             ->orderBy('id desc')
             ->all();
         $donateCount = Donate::find()->count();
-        $datas = array();
+        $datas = [];
         foreach ($donates as $onedonate) {
             $bookname = BookLib::getBookInfo($onedonate->bookid);
             $bookname = $bookname["bookname"];
@@ -37,20 +38,20 @@ class DonateController extends BaseController
             $agencyname = $agencyname["name"];
             $donorname = UserInfo::getUserInfo($onedonate->donorid);
             $donorname = $donorname["nickname"];
-            $datas[] = array(
-                'id' => $onedonate->id,
-                'bookname' => $bookname,
-                'donorname' => $donorname,
+            $datas[] = [
+                'id'         => $onedonate->id,
+                'bookname'   => $bookname,
+                'donorname'  => $donorname,
                 'agencyname' => $agencyname,
                 'donatetime' => $onedonate->donatetime,
-            );
+            ];
         }
-        return json_encode(array(
-            "draw" => intval(Yii::$app->request->post("draw")),
-            "recordsTotal" => $donateCount,
+        return json_encode([
+            "draw"            => intval(Yii::$app->request->post("draw")),
+            "recordsTotal"    => $donateCount,
             "recordsFiltered" => $donateCount,
-            "data" => $datas,
-        ));
+            "data"            => $datas,
+        ]);
     }
 
     /**
@@ -86,28 +87,28 @@ class DonateController extends BaseController
             }
         }
         if (isset($bookid) && isset($agencyid)) {
-            $donateId = Donate::recordNewOrChange(array(
-                "bookid" => $bookid,
-                "donorid" => $donorid,
-                "agencyid" => $agencyid,
+            $donateId = Donate::recordNewOrChange([
+                "bookid"      => $bookid,
+                "donorid"     => $donorid,
+                "agencyid"    => $agencyid,
                 "description" => $description,
-            ));
+            ]);
             if ($donateId) {
-                return json_encode(array(
-                    'code' => 0,
+                return json_encode([
+                    'code'     => 0,
                     'donateid' => $donateId,
-                ));
+                ]);
             } else {
-                return json_encode(array(
-                    'code' => -1,
+                return json_encode([
+                    'code'    => -1,
                     'message' => '添加失败',
-                ));
+                ]);
             }
         } else {
-            return json_encode(array(
-                'code' => -1,
+            return json_encode([
+                'code'    => -1,
                 'message' => '请选择书籍或捐助点',
-            ));
+            ]);
         }
 
     }
@@ -117,14 +118,14 @@ class DonateController extends BaseController
         $donateId = intval(Yii::$app->request->post("donateid"));
         $delRes = Donate::findOne($donateId)->delete();
         if ($delRes) {
-            return json_encode(array(
-                'code' => 0
-            ));
+            return json_encode([
+                'code' => 0,
+            ]);
         } else {
-            return json_encode(array(
-                "code" => -1,
-                "message" => "删除失败"
-            ));
+            return json_encode([
+                "code"    => -1,
+                "message" => "删除失败",
+            ]);
         }
     }
 
@@ -140,26 +141,26 @@ class DonateController extends BaseController
         $longi = Yii::$app->request->post("longi");
 
         if ((empty($doanteId)) || (empty($information)) || (empty($lati)) || (empty($longi))) {
-            return json_encode(array(
-                "code" => -1,
-                "message" => "信息不全"
-            ));
+            return json_encode([
+                "code"    => -1,
+                "message" => "信息不全",
+            ]);
         } else {
-            $saveRes = DonateTrack::addTrack(array(
-                "donateid" => $doanteId,
-                "information" => $information,
+            $saveRes = DonateTrack::addTrack([
+                "donateid"        => $doanteId,
+                "information"     => $information,
                 "trackcoordinate" => $lati . ',' . $longi,
-            ));
+            ]);
 
             if ($saveRes) {
-                return json_encode(array(
-                    "code" => 0
-                ));
+                return json_encode([
+                    "code" => 0,
+                ]);
             } else {
-                return json_encode(array(
-                    "code" => -1,
-                    "message" => "添加失败"
-                ));
+                return json_encode([
+                    "code"    => -1,
+                    "message" => "添加失败",
+                ]);
             }
         }
     }

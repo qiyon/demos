@@ -1,4 +1,4 @@
-# sxadmin
+# book admin
 
 ## 关于
 我的毕业设计(2014年4月)，用`Yii 1`实现的书籍捐赠管理平台，数据库存储实现、Web端公共前台与管理后台、以及`HTTP`形式的`API`接口。
@@ -12,14 +12,6 @@
 `Yii 2`的PHP版本要求至少为`5.4`版本，但此迁移进行时，版本基于`php7`，所以建议搭建`php7`的开发环境。
 
 安装`composer`，参考[英文官网](https://getcomposer.org/)，或者[composer中文网](http://www.phpcomposer.com/)。
-
-### 安装composer-asset-plugin
-`Yii 2`框架，包含了`jQuery`和`Bootstrap`代码，这部分的静态文件依赖通过`fxp/composer-asset-plugin`这个`composer`插件来管理。
-
-安装方式：
-```
-composer global require "fxp/composer-asset-plugin:~1.1.1"
-```
 
 ### 安装此项目代码和依赖
 获取此项目的代码，在此项目根目录(`composer.json`所在的目录)，安装依赖，执行命令:

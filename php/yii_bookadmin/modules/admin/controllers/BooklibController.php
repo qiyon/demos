@@ -1,4 +1,5 @@
 <?php
+
 namespace app\modules\admin\controllers;
 
 use Yii;
@@ -32,22 +33,22 @@ class BooklibController extends BaseController
             ->offset(intval(Yii::$app->request->get("iDisplayStart")))
             ->limit(intval(Yii::$app->request->get("iDisplayLength")));
         $books = $query->all();
-        $bookDatas = array();
+        $bookDatas = [];
         foreach ($books as $bookInfo) {
-            $bookDatas[] = array(
-                "id" => $bookInfo->id,
-                "bookname" => $bookInfo->bookname,
-                "author" => $bookInfo->author,
+            $bookDatas[] = [
+                "id"        => $bookInfo->id,
+                "bookname"  => $bookInfo->bookname,
+                "author"    => $bookInfo->author,
                 "pub_house" => $bookInfo->pub_house,
-                "ISBN" => $bookInfo->ISBN,
-            );
+                "ISBN"      => $bookInfo->ISBN,
+            ];
         }
-        return json_encode(array(
-            "draw" => intval(Yii::$app->request->get("draw")),
-            "recordsTotal" => $bookCount,
+        return json_encode([
+            "draw"            => intval(Yii::$app->request->get("draw")),
+            "recordsTotal"    => $bookCount,
             "recordsFiltered" => $bookCount,
-            "data" => $bookDatas,
-        ));
+            "data"            => $bookDatas,
+        ]);
     }
 
     /**
@@ -56,20 +57,20 @@ class BooklibController extends BaseController
     public function actionAddbook()
     {
         if (empty($_POST["bookname"])) {
-            return json_encode(array(
-                "code" => -1,
+            return json_encode([
+                "code"    => -1,
                 "message" => "书名不能为空",
-            ));
+            ]);
         }
         if (BookLib::bookAddOrChange($_POST)) {
-            return json_encode(array(
+            return json_encode([
                 "code" => 0,
-            ));
+            ]);
         } else {
-            return json_encode(array(
-                "code" => -1,
+            return json_encode([
+                "code"    => -1,
                 "message" => "添加失败",
-            ));
+            ]);
         }
     }
 
@@ -78,23 +79,23 @@ class BooklibController extends BaseController
         $searchBook = Yii::$app->request->post('search', '');
         $query = BookLib::find();
         if (!empty($searchBook)) {
-            $query->where('bookname like :bookname', array(':bookname' => '%' . $searchBook . '%'));
+            $query->where('bookname like :bookname', [':bookname' => '%' . $searchBook . '%']);
         }
         $query->orderBy('id desc');
         $bookList = $query->all();
-        $boobArray = array();
+        $boobArray = [];
         foreach ($bookList as $onebook) {
-            $boobArray[] = array(
-                'id' => $onebook->id,
+            $boobArray[] = [
+                'id'       => $onebook->id,
                 'bookname' => $onebook->bookname,
-                'author' => $onebook->author,
-                'ISBN' => $onebook->ISBN,
-            );
+                'author'   => $onebook->author,
+                'ISBN'     => $onebook->ISBN,
+            ];
         }
-        return json_encode(array(
+        return json_encode([
             'code' => 0,
             'data' => $boobArray,
-        ));
+        ]);
     }
 
     public function actionDelbook()
@@ -102,19 +103,19 @@ class BooklibController extends BaseController
         $bookid = intval(Yii::$app->request->post("bookid"));
         $delRes = BookLib::bookDelete($bookid);
         if ($delRes == -1) {
-            return json_encode(array(
-                "code" => -1,
+            return json_encode([
+                "code"    => -1,
                 "message" => "有捐助信息与此书关联，禁止删除",
-            ));
+            ]);
         } elseif ($delRes == 1) {
-            return json_encode(array(
+            return json_encode([
                 "code" => 0,
-            ));
+            ]);
         } else {
-            return json_encode(array(
-                "code" => -11,
-                "message" => "删除失败"
-            ));
+            return json_encode([
+                "code"    => -11,
+                "message" => "删除失败",
+            ]);
         }
     }
 
@@ -134,20 +135,20 @@ class BooklibController extends BaseController
     public function actionEdit()
     {
         if (empty($_POST["bookname"])) {
-            return json_encode(array(
-                "code" => -1,
+            return json_encode([
+                "code"    => -1,
                 "message" => "书名不能为空",
-            ));
+            ]);
         }
         if (BookLib::bookAddOrChange($_POST)) {
-            return json_encode(array(
+            return json_encode([
                 "code" => 0,
-            ));
+            ]);
         } else {
-            return json_encode(array(
-                "code" => -1,
+            return json_encode([
+                "code"    => -1,
                 "message" => "编辑失败",
-            ));
+            ]);
         }
     }
 }

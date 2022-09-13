@@ -1,4 +1,5 @@
 <?php
+
 namespace app\modules\admin\controllers;
 
 use Yii;
@@ -39,10 +40,10 @@ class IndexController extends BaseController
                 if (empty($url)) $url = "/admin";
                 return $this->redirect($url);
             } else {
-                return $this->render("login", array(
+                return $this->render("login", [
                     'errortype' => 'warning',
-                    'message' => '用户名或密码错误！'
-                ));
+                    'message'   => '用户名或密码错误！',
+                ]);
             }
         } else {
             return $this->render("login");

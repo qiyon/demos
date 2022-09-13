@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models;
 
 use yii\db\ActiveRecord as CActiveRecord;
@@ -14,16 +15,16 @@ class DonateTrack extends CActiveRecord
     {
         $donateid = intval($donateid);
         $trackM = self::find()->where(['donateid' => $donateid])->all();
-        $trackArr = array();
+        $trackArr = [];
         foreach ($trackM as $oneTrack) {
             $tkCoordinate = explode(',', $oneTrack->trackcoordinate);
-            $trackArr[] = array(
-                "tracktime" => $oneTrack->tracktime,
-                "information" => $oneTrack->information,
+            $trackArr[] = [
+                "tracktime"       => $oneTrack->tracktime,
+                "information"     => $oneTrack->information,
                 "trackcoordinate" => $oneTrack->trackcoordinate,
-                "tracklongi" => $tkCoordinate[1],
-                "tracklati" => $tkCoordinate[0],
-            );
+                "tracklongi"      => isset($tkCoordinate[1]) ? $tkCoordinate[1] : '',
+                "tracklati"       => isset($tkCoordinate[0]) ? $tkCoordinate[0] : '',
+            ];
         }
         return $trackArr;
     }

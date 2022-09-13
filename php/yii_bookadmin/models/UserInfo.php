@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models;
 
 use Yii;
@@ -19,22 +20,22 @@ class UserInfo extends CActiveRecord implements \yii\web\IdentityInterface
     public static function getUserInfo($userid)
     {
         $userid = intval($userid);
-        $nullInfo = array(
-            'id' => 0,
+        $nullInfo = [
+            'id'       => 0,
             'username' => 'nothing',
             'nickname' => '无信息',
-            'isadmin' => 0,
-        );
+            'isadmin'  => 0,
+        ];
         $Model_U = self::findOne($userid);
         if (empty($Model_U)) {
             return $nullInfo;
         } else {
-            return array(
-                'id' => $Model_U->id,
+            return [
+                'id'       => $Model_U->id,
                 'username' => $Model_U->username,
                 'nickname' => $Model_U->nickname,
-                'isadmin' => $Model_U->isadmin,
-            );
+                'isadmin'  => $Model_U->isadmin,
+            ];
         }
     }
 

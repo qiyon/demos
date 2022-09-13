@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models;
 
 use yii\db\ActiveRecord as CActiveRecord;
@@ -55,7 +56,7 @@ class Agency extends CActiveRecord
     public static function agencyDelete($agencyid)
     {
         $agencyid = intval($agencyid);
-        if (donate::model()->count("agencyid=:agencyid", array(":agencyid" => $agencyid)) > 0) {
+        if (donate::model()->count("agencyid=:agencyid", [":agencyid" => $agencyid]) > 0) {
             return -1;
         }
 
@@ -75,35 +76,35 @@ class Agency extends CActiveRecord
     public static function getAgencyInfo($agencyid)
     {
         $agencyid = intval($agencyid);
-        $nullAgency = array(
-            'id' => 0,
-            'name' => '暂无信息',
-            'person' => '',
-            'address' => '',
-            'telephone' => '',
-            'worktime' => '',
-            'coordinate' => '0,0',
-            'longi' => '0',
-            'lati' => '0',
+        $nullAgency = [
+            'id'          => 0,
+            'name'        => '暂无信息',
+            'person'      => '',
+            'address'     => '',
+            'telephone'   => '',
+            'worktime'    => '',
+            'coordinate'  => '0,0',
+            'longi'       => '0',
+            'lati'        => '0',
             'description' => '',
-        );
+        ];
         $Model_A = self::findOne($agencyid);
         if (empty($Model_A)) {
             return $nullAgency;
         } else {
             $coordinate = explode(',', $Model_A->coordinate);
-            return array(
-                'id' => $Model_A->id,
-                'name' => $Model_A->name,
-                'person' => $Model_A->person,
-                'address' => $Model_A->address,
-                'telephone' => $Model_A->telephone,
-                'worktime' => $Model_A->worktime,
-                'coordinate' => $Model_A->coordinate,
+            return [
+                'id'          => $Model_A->id,
+                'name'        => $Model_A->name,
+                'person'      => $Model_A->person,
+                'address'     => $Model_A->address,
+                'telephone'   => $Model_A->telephone,
+                'worktime'    => $Model_A->worktime,
+                'coordinate'  => $Model_A->coordinate,
                 'description' => $Model_A->description,
-                "longi" => $coordinate[1],
-                "lati" => $coordinate[0],
-            );
+                "longi"       => isset($coordinate[1]) ? $coordinate[1] : '',
+                "lati"        => isset($coordinate[0]) ? $coordinate[0] : '',
+            ];
         }
     }
 }

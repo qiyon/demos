@@ -3,7 +3,7 @@ use app\models\Donate;
 use app\models\BookLib;
 use app\models\Agency;
 
-$this->registerJsFile('/js/app/index/index.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('/js/app/index/index.js', ['depends' => [\app\assets\JqueryAsset::class]]);
 ?>
 <div class="container">
     <div class="row">

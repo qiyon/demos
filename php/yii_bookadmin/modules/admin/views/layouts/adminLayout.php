@@ -1,17 +1,14 @@
 <?php
+
 use app\assets\AppAsset;
 
 AppAsset::register($this);
-//messenger
-$this->registerCssFile('/js/lib/messenger/css/messenger.css');
-$this->registerCssFile('/js/lib/messenger/css/messenger-theme-future.css');
-$this->registerJsFile('/js/lib/messenger/js/messenger.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-//dataTable
-$this->registerCssFile('/js/lib/jquerydatatables/css/jquery.dataTables.min.css');
-$this->registerCssFile('/js/lib/jquerydatatables/css/jquery.dataTables_themeroller.min.css');
-$this->registerJsFile('/js/lib/jquerydatatables/js/jquery.dataTables.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 //util
-$this->registerJsFile('/js/app/Util.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('/js/app/Util.js', ['depends' => [
+    \app\assets\JqueryAsset::class,
+    \app\assets\lib\JqueryDataTablesAsset::class,
+    \app\assets\lib\MessengerAsset::class,
+]]);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

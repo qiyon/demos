@@ -1,5 +1,5 @@
 <?php
-$this->registerJsFile('/js/app/admin/booklib/index.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('/js/app/admin/booklib/index.js', ['depends' => [\app\assets\JqueryAsset::class]]);
 ?>
 <div class="container">
     <div class="row">
