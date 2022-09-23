@@ -6,7 +6,7 @@ use yii\web\AssetBundle;
 
 class BootstrapAsset extends AssetBundle
 {
-    public $baseUrl = 'https://stackpath.bootstrapcdn.com/bootstrap/3.4.1';
+    public $baseUrl = 'https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1';
     public $css = [
         'css/bootstrap.min.css',
     ];

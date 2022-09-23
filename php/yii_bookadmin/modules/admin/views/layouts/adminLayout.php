@@ -1,8 +1,7 @@
 <?php
 
-use app\assets\AppAsset;
+\app\assets\AppAsset::register($this);
 
-AppAsset::register($this);
 //util
 $this->registerJsFile('/js/app/Util.js', ['depends' => [
     \app\assets\JqueryAsset::class,

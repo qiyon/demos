@@ -1,7 +1,5 @@
 <?php
-use app\assets\AppAsset;
-
-AppAsset::register($this);
+\app\assets\AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!doctype html>
