@@ -3,6 +3,7 @@ SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s') AS dtstr;
 SELECT NOW() AS now, UNIX_TIMESTAMP(NOW()) AS unixtime, FROM_UNIXTIME(UNIX_TIMESTAMP(NOW())) AS timestmp;
 SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(NOW()), '%Y%m%d%H%i%s') AS dtnumstr;
 SELECT CONVERT_TZ(NOW(), @@session.time_zone, '+00:00') AS utcnow;
+SELECT CAST('2000-01-01 00:00:00' AS DATETIME) = '2000-01-01' AS mixed, '2000-01-01 00:00:00' = '2000-01-01' AS str;
 
 -- strings
 SELECT SUBSTRING_INDEX(SUBSTRING_INDEX('{"field_1":"val","filed_2":0}', '"field_1":"', -1), '",', 1) AS split_get;
