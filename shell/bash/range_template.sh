@@ -7,4 +7,3 @@ for i in $(seq $START $END); do
 	MSG=msg:$i:$(($i+100))
 	echo $MSG
 done
-

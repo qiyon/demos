@@ -3,4 +3,3 @@ alias pxoff="unset http_proxy; unset https_proxy; echo 'HTTP Proxy off';"
 
 alias ltcp="lsof -iTCP -sTCP:LISTEN -nP"
 alias ludp="lsof -iUDP -nP"
-

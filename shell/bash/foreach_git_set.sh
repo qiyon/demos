@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 for dir in `ls`;
 do
 	if [ -d "$dir" ]; then

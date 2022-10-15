@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 date_list=(
 20180323
 20180324
