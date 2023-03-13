@@ -1,3 +1,3 @@
 # demos
 
-Some demos: dockerfile, tools configure(vim bash),  codebase (golang php sql js) etc.
+Some demos: dockerfile, tools configure(git bash), codebase(golang php sql js) etc.
