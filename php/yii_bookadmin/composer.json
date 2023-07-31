@@ -10,7 +10,7 @@
   "require": {
     "php": ">=5.6.0",
     "yidas/yii2-composer-bower-skip": "2.0.13",
-    "yiisoft/yii2": "2.0.46"
+    "yiisoft/yii2": "2.0.47"
   },
   "require-dev": {
     "yiisoft/yii2-codeception": "*",
