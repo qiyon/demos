@@ -6,41 +6,60 @@ import (
 	"time"
 )
 
-type Wrapper struct {
-	IntraPtr *Intra
-	m        sync.Mutex
+type ServiceDemo struct {
+	Component *ComponentDemo
+	m         sync.Mutex
 }
 
-func (w *Wrapper) Reset() {
-	//w.m.Lock()
-	//defer w.m.Unlock()
-	w.IntraPtr = &Intra{Val: "2"}
+func (s *ServiceDemo) Init() {
+	s.Component = &ComponentDemo{Val: "1"}
 }
 
-type Intra struct {
+func (s *ServiceDemo) Fresh() {
+	s.m.Lock()
+	defer s.m.Unlock()
+	s.Component = &ComponentDemo{Val: "2"}
+}
+
+func (s *ServiceDemo) Run() {
+	s.Component.Run()
+}
+
+func (s *ServiceDemo) SafeGetComponent() *ComponentDemo {
+	s.m.Lock()
+	defer s.m.Unlock()
+	return s.Component
+}
+
+func (s *ServiceDemo) SafeRun() {
+	p := s.SafeGetComponent()
+	p.Run()
+}
+
+type ComponentDemo struct {
 	Val string
 }
 
-func (s *Intra) Run() {
+func (c *ComponentDemo) Run() {
 	for i := 0; i < 10; i++ {
-		time.Sleep(100 * time.Millisecond)
-		fmt.Println(s.Val)
+		time.Sleep(50 * time.Millisecond)
+		fmt.Println(c.Val)
 	}
 }
 
 func main() {
-	w := &Wrapper{
-		IntraPtr: &Intra{Val: "1"},
-	}
-
+	svc := &ServiceDemo{}
+	svc.Init()
 	go func() {
-		//w.m.Lock()
-		//defer w.m.Unlock()
-		w.IntraPtr.Run()
+		time.Sleep(300 * time.Millisecond)
+		fmt.Printf("Service Component Fresh...\n")
+		svc.Fresh()
 	}()
 
-	time.Sleep(300 * time.Millisecond)
-	w.Reset()
+	for i := 0; i <= 3; i++ {
+		fmt.Printf("Svc Run In Loop: %d\n", i)
 
-	time.Sleep(1 * time.Second)
+		svc.Run()
+		//svc.SafeRun()
+	}
 }
