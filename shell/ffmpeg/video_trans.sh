@@ -5,6 +5,8 @@ ffmpeg -i input_video.mp4
 ffmpeg -i input_video.mp4 -c:v libx264 -b:v 1000k output_video.mp4
 # 转码 压缩，指定分辨率
 ffmpeg -i input_video.mp4 -c:v libx264 -preset medium -crf 23 -s 1280x720 output_video_x264.mp4
+# For Mac VideoToolBox
+ffmpeg -i input_video.mp4 -c:v h264_videotoolbox -q:v 65 -s 1280x720 output_video_x264.mp4
 
 # 参数说明
 # -c:v libx264 指定了视频编码器为H.264
@@ -14,3 +16,4 @@ ffmpeg -i input_video.mp4 -c:v libx264 -preset medium -crf 23 -s 1280x720 output
 # -s 1280x720 设置视频分辨率为1280x720，降低分辨率可以减小文件大小。
 # -r 24 设置视频帧率为24帧/秒，降低帧率也可以减小文件大小。
 # -c:a copy 表示音频流不进行编码，直接复制到输出文件中，保持音频质量不变
+# -q:v 65 某些库的视频质量参数，如 Mac VideoToolBox，1-100，越高质量约好
